@@ -8,11 +8,8 @@ namespace CodingChallange.WebApi2.Controllers
 {
     public class TestApiController : ApiController
     {
-        public TestApiController()
-        {
-            var x = "mak'";
-        }
-        // GET api/values
+
+        // GET api/TestApi
         public HttpResponseMessage Get()
         {
             var result = UserInfo.Users.Select(o => new { UserName = o.Key, Password = o.Value }).ToList();
@@ -27,23 +24,23 @@ namespace CodingChallange.WebApi2.Controllers
             }
         }
 
-        // GET api/values/5
+        // GET api/TestApi/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
+        // POST api/TestApi
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/TestApi/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/TestApi/5
         public void Delete(int id)
         {
         }

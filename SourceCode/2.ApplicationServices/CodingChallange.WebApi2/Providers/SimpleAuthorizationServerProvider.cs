@@ -16,14 +16,14 @@ namespace CodingChallange.WebApi2.Providers
             return Task.FromResult<object>(null);
         }
 
-        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
 
             var userInfo = UserInfo.IsValid(context.UserName, context.Password);
             if (!userInfo.Item1)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                return Task.FromResult<object>(null);
             }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
@@ -38,7 +38,7 @@ namespace CodingChallange.WebApi2.Providers
 
             var ticket = new AuthenticationTicket(identity, props);
             context.Validated(ticket);
-
+            return Task.FromResult<object>(null);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

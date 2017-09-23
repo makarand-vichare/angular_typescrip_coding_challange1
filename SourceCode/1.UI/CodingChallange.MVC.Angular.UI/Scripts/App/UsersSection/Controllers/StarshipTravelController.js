@@ -14,8 +14,9 @@ var UsersSection;
     (function (Controllers) {
         var StarshipTravelController = (function (_super) {
             __extends(StarshipTravelController, _super);
-            function StarshipTravelController(_injectorService, starshipTravelService, planetService) {
+            function StarshipTravelController(_injectorService, modelService, starshipTravelService, planetService) {
                 var _this = _super.call(this, _injectorService) || this;
+                _this.modelService = modelService;
                 _this.starshipTravelService = starshipTravelService;
                 _this.planetService = planetService;
                 _this.starshipModel = {
@@ -23,7 +24,37 @@ var UsersSection;
                     next: '',
                     previous: ''
                 };
+                _this.onlyNumbers = /^[1-9][0-9]*$/;
                 _this.planetDistance = 1000000;
+                _this.showModal = false;
+                //OpenModel = (starship: AdminSection.ViewModels.IStarshipVM) => {
+                //    var options: ng.ui.bootstrap.IModalSettings = {
+                //        templateUrl: 'modal.html',
+                //        controller: Common.Controllers.ModelController + ' as modal',
+                //        resolve: {
+                //            item: () => starship // <- this will pass the same instance 
+                //            // of the item displayed in the table to the modal
+                //        }
+                //    };
+                //    //this.$modal.open(options).result
+                //    //    .then(updatedItem => this.CloseModel(updatedItem));
+                //}
+                _this.OpenStarshipModel = function (starship) {
+                    var self = _this;
+                    var modalInstance = self.modelService.open({
+                        templateUrl: 'starshipModal.html',
+                        controller: Common.Controllers.ModelController,
+                        bindToController: true,
+                        controllerAs: 'popup',
+                        resolve: {
+                            item: function () { return starship; } // <- this will pass the same instance 
+                            // of the item displayed in the table to the modal
+                        }
+                    });
+                    modalInstance.result.then(function (selectedItem) {
+                        self.selectedStarship = selectedItem;
+                    });
+                };
                 _this.GetShipsSupplyCount = function () {
                     var self = _this;
                     self.StartProcess();
@@ -64,7 +95,7 @@ var UsersSection;
             }
             return StarshipTravelController;
         }(Common.Controllers.BaseController));
-        StarshipTravelController.$inject = ["$injector", "UsersSection.Services.StarshipTravelService", "AdminSection.Services.PlanetService"];
+        StarshipTravelController.$inject = ["$injector", "$uibModal", "UsersSection.Services.StarshipTravelService", "AdminSection.Services.PlanetService"];
         Controllers.StarshipTravelController = StarshipTravelController;
         App.ModuleInitiator.GetModule("UsersSection").controller("UsersSection.Controllers.StarshipTravelController", StarshipTravelController);
     })(Controllers = UsersSection.Controllers || (UsersSection.Controllers = {}));

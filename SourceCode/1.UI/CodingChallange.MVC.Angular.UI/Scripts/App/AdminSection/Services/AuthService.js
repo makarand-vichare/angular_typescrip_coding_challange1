@@ -88,4 +88,4 @@ var AdminSection;
         App.ModuleInitiator.GetModule("AdminSection").service("AdminSection.Services.AuthService", AuthService);
     })(Services = AdminSection.Services || (AdminSection.Services = {}));
 })(AdminSection || (AdminSection = {}));
-//# sourceMappingURL=AuthService.js.map
+//# sourceMappingURL=authservice.js.map

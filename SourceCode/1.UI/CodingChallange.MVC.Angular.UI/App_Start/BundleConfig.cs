@@ -11,17 +11,19 @@ namespace CodingChallange.MVC.Angular.UI
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
             "~/Scripts/angular.js",
-             "~/Scripts/angular-cookies.js",
-           "~/Scripts/angular-route.js",
+            "~/Scripts/angular-cookies.js",
+            "~/Scripts/angular-route.js",
             "~/Scripts/angular-local-storage.js",
             "~/Scripts/loading-bar.js",
-            "~/Scripts/angular-messages.js"
+            "~/Scripts/angular-messages.js",
+            "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
             ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
             "~/Content/bootstrap.css",
             "~/Content/site.css",
             "~/Content/loading-bar.css",
+            "~/Content/ui-bootstrap-csp.css",
             "~/Content/app.css"
             ));
       
@@ -31,6 +33,7 @@ namespace CodingChallange.MVC.Angular.UI
                 "~/Scripts/App/ModuleInitiator.js",
                 "~/Scripts/App/Common/AppConstants.js",
                 "~/Scripts/App/Common/BaseController.js",
+                "~/Scripts/App/Common/ModelController.js",
                 "~/Scripts/App/Common/AuthenticationInterceptor.js",
                 "~/Scripts/App/Common/BaseService.js"
 

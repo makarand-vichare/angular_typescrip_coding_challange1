@@ -17,10 +17,10 @@ var App;
     }());
     ModuleInitiator.modulesList = [
         { name: 'App', dependencies: Array() },
-        { name: 'Common', dependencies: Array() },
+        { name: 'Common', dependencies: Array("ui.bootstrap") },
         { name: 'AdminSection', dependencies: Array("ngRoute", "Common", "LocalStorageModule", "angular-loading-bar", "ngMessages") },
         { name: 'HomeSection', dependencies: Array("ngRoute", "Common", "LocalStorageModule", "AdminSection", "angular-loading-bar", "ngMessages") },
-        { name: 'UsersSection', dependencies: Array("ngRoute", "Common", "LocalStorageModule", "AdminSection", "angular-loading-bar", "ngMessages") },
+        { name: 'UsersSection', dependencies: Array("ui.bootstrap", "ngRoute", "Common", "LocalStorageModule", "AdminSection", "angular-loading-bar", "ngMessages") },
     ];
     App.ModuleInitiator = ModuleInitiator;
     App.ModuleInitiator.GetModule("App").service("App.ModuleInitiator", ModuleInitiator);

@@ -138,6 +138,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\App\AdminSection\Views\home.html" />
     <Content Include="Scripts\App\AdminSection\Views\login.html" />
     <Content Include="Scripts\App\AdminSection\Views\planets.html" />
@@ -244,6 +249,7 @@
     <TypeScriptCompile Include="Scripts\App\AdminSection\ViewModels\IStarshipVM.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\ViewModels\IUserVM.ts" />
     <TypeScriptCompile Include="Scripts\App\Common\AuthenticationInterceptor.ts" />
+    <TypeScriptCompile Include="Scripts\App\Common\ModelController.ts" />
     <TypeScriptCompile Include="Scripts\App\Common\BaseController.spec.ts" />
     <TypeScriptCompile Include="Scripts\App\Common\BaseController.ts" />
     <TypeScriptCompile Include="Scripts\App\Common\Directives\AntiForgeryTokenDirective.ts" />
@@ -275,6 +281,7 @@
     <TypeScriptCompile Include="Scripts\App\UsersSection\ViewModels\IStarshipTravelVM.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-loading-bar\angular-loading-bar.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-local-storage\angular-local-storage.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular-ui-bootstrap\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-component-router.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
