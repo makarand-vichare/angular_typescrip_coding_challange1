@@ -1,13 +1,25 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var UsersSection;
 (function (UsersSection) {
     var Services;
     (function (Services) {
-        var StarshipTravelService = (function () {
-            function StarshipTravelService(httpService, qService) {
-                var _this = this;
-                this.httpService = httpService;
-                this.qService = qService;
-                this.GetByUrl = function (url, planetDistance) {
+        var StarshipTravelService = (function (_super) {
+            __extends(StarshipTravelService, _super);
+            function StarshipTravelService(injectorService, httpService, qService) {
+                var _this = _super.call(this, injectorService) || this;
+                _this.injectorService = injectorService;
+                _this.httpService = httpService;
+                _this.qService = qService;
+                _this.GetByUrl = function (url, planetDistance) {
                     var self = _this;
                     var defer = _this.qService.defer();
                     var config = {
@@ -25,7 +37,7 @@ var UsersSection;
                     });
                     return defer.promise;
                 };
-                this.GetShipsSupplyCount = function (planetDistance) {
+                _this.GetShipsSupplyCount = function (planetDistance) {
                     var self = _this;
                     var config = {
                         headers: {
@@ -43,7 +55,7 @@ var UsersSection;
                     });
                     return defer.promise;
                 };
-                this.CalculateReSupplyCount = function (starShips, planetDistance) {
+                _this.CalculateReSupplyCount = function (starShips, planetDistance) {
                     var self = _this;
                     starShips.forEach(function (starship) {
                         var unknown = 'unknown';
@@ -53,7 +65,7 @@ var UsersSection;
                     });
                     return starShips;
                 };
-                this.GetConsumablesInHour = function (consumables) {
+                _this.GetConsumablesInHour = function (consumables) {
                     var result = 0;
                     var splitArray = consumables.split(' ');
                     switch (splitArray[1]) {
@@ -84,16 +96,17 @@ var UsersSection;
                     }
                     return result;
                 };
+                return _this;
             }
             return StarshipTravelService;
-        }());
-        StarshipTravelService.$inject = ["$http", "$q"];
+        }(Common.Services.BaseService));
+        StarshipTravelService.$inject = ["$injector", "$http", "$q"];
         StarshipTravelService.GetInstance = function () {
-            var instance = function (httpService, qService) { return new StarshipTravelService(httpService, qService); };
+            var instance = function (injectorService, httpService, qService) { return new StarshipTravelService(injectorService, httpService, qService); };
             return instance;
         };
         Services.StarshipTravelService = StarshipTravelService;
         App.ModuleInitiator.GetModule("UsersSection").service("UsersSection.Services.StarshipTravelService", StarshipTravelService);
     })(Services = UsersSection.Services || (UsersSection.Services = {}));
 })(UsersSection || (UsersSection = {}));
-//# sourceMappingURL=StarshipTravelService.js.map
+//# sourceMappingURL=starshiptravelservice.js.map

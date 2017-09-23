@@ -1,14 +1,15 @@
 ﻿
 module AdminSection.Services
 {
-    export class AuthService implements AdminSection.Interfaces.IAuthService
+    export class AuthService extends Common.Services.BaseService implements AdminSection.Interfaces.IAuthService
     {
         httpService: ng.IHttpService;
         localStorageService: ng.local.storage.ILocalStorageService;
-        static $inject = ["$http", "localStorageService"];
+        static $inject = ["$injector", "$http", "localStorageService"];
 
-        constructor( $http: ng.IHttpService, _localStorageService: ng.local.storage.ILocalStorageService )
+        constructor(private injectorService: ng.auto.IInjectorService, $http: ng.IHttpService, _localStorageService: ng.local.storage.ILocalStorageService )
         {
+            super(injectorService);
             this.httpService = $http;
             this.localStorageService = _localStorageService;
         }
@@ -95,7 +96,7 @@ module AdminSection.Services
 
         public static getInstance()
         {
-            var instance = ( $http: ng.IHttpService, _localStorageService: ng.local.storage.ILocalStorageService ) => new AuthService( $http, _localStorageService);
+            var instance = (injectorService: ng.auto.IInjectorService, $http: ng.IHttpService, _localStorageService: ng.local.storage.ILocalStorageService) => new AuthService(injectorService, $http, _localStorageService);
             return instance;
         }
     }

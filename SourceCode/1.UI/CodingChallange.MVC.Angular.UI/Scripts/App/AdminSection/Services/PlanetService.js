@@ -1,12 +1,24 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var AdminSection;
 (function (AdminSection) {
     var Services;
     (function (Services) {
-        var PlanetService = (function () {
-            function PlanetService(httpService) {
-                var _this = this;
-                this.httpService = httpService;
-                this.GetByPage = function (page) {
+        var PlanetService = (function (_super) {
+            __extends(PlanetService, _super);
+            function PlanetService(injectorService, httpService) {
+                var _this = _super.call(this, injectorService) || this;
+                _this.injectorService = injectorService;
+                _this.httpService = httpService;
+                _this.GetByPage = function (page) {
                     var self = _this;
                     var config = {
                         params: { page: page },
@@ -16,7 +28,7 @@ var AdminSection;
                     };
                     return self.httpService.get(Common.AppConstants.SWAPIUrl + '/planets/', config);
                 };
-                this.GetByUrl = function (url) {
+                _this.GetByUrl = function (url) {
                     var self = _this;
                     var config = {
                         headers: {
@@ -25,16 +37,17 @@ var AdminSection;
                     };
                     return self.httpService.get(url, config);
                 };
+                return _this;
             }
             return PlanetService;
-        }());
-        PlanetService.$inject = ["$http"];
+        }(Common.Services.BaseService));
+        PlanetService.$inject = ["$injector", "$http"];
         PlanetService.GetInstance = function () {
-            var instance = function ($http) { return new PlanetService($http); };
+            var instance = function (injectorService, $http) { return new PlanetService(injectorService, $http); };
             return instance;
         };
         Services.PlanetService = PlanetService;
         App.ModuleInitiator.GetModule("AdminSection").service("AdminSection.Services.PlanetService", PlanetService);
     })(Services = AdminSection.Services || (AdminSection.Services = {}));
 })(AdminSection || (AdminSection = {}));
-//# sourceMappingURL=PlanetService.js.map
+//# sourceMappingURL=planetservice.js.map

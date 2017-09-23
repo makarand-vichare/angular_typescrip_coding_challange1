@@ -122,8 +122,8 @@ describe("StarshipService", function () {
             }
         ]);
         var starships = service.GetByPage(1);
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+        expect(starships).toBeDefined();
     });
     it("should get starships by next", function () {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=2").respond([
@@ -226,8 +226,8 @@ describe("StarshipService", function () {
             }
         ]);
         var starships = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=2");
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+        expect(starships).toBeDefined();
     });
     it("should get starships by previous", function () {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond([
@@ -330,8 +330,8 @@ describe("StarshipService", function () {
             }
         ]);
         var starships = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=1");
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+        expect(starships).toBeDefined();
     });
 });
 //# sourceMappingURL=StarshipService.spec.js.map

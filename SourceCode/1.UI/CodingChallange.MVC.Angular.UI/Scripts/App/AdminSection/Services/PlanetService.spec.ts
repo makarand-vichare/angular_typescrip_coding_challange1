@@ -92,8 +92,8 @@ describe("PlanetService", () => {
         ]);
 
         var planets = service.GetByPage(1);
-        expect(planets).toBeDefined();
         httpBackEndService.flush();
+        expect(planets).toBeDefined();
     });
 
     it("should get planets by next", () => {
@@ -160,8 +160,8 @@ describe("PlanetService", () => {
         ]);
 
         var planets = service.GetByUrl(Common.AppConstants.SWAPIUrl + "planets/?page=2");
-        expect(planets).toBeDefined();
         httpBackEndService.flush();
+       expect(planets).toBeDefined();
     });
 
     it("should get planets by previous", () => {
@@ -228,7 +228,7 @@ describe("PlanetService", () => {
         ]);
 
         var planets = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2");
-        expect(planets).toBeDefined();
         httpBackEndService.flush();
+       expect(planets).toBeDefined();
     });
 });

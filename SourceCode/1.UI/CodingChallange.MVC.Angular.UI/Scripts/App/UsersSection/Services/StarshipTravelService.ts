@@ -1,8 +1,11 @@
 ﻿
 module UsersSection.Services {
-    export class StarshipTravelService implements UsersSection.Interfaces.IStarshipTravelService {
-        static $inject = ["$http", "$q"];
-        constructor(private httpService: ng.IHttpService, private qService: ng.IQService) { }
+    export class StarshipTravelService extends Common.Services.BaseService
+        implements UsersSection.Interfaces.IStarshipTravelService {
+        static $inject = ["$injector", "$http", "$q"];
+        constructor(private injectorService: ng.auto.IInjectorService, private httpService: ng.IHttpService, private qService: ng.IQService) {
+            super(injectorService);
+        }
 
         GetByUrl = (url: string, planetDistance: number): ng.IPromise<any> => {
             var self = this;
@@ -91,7 +94,7 @@ module UsersSection.Services {
         }
 
         static GetInstance = () => {
-            var instance = (httpService: ng.IHttpService, qService: ng.IQService) => new StarshipTravelService(httpService, qService);
+            var instance = (injectorService: ng.auto.IInjectorService, httpService: ng.IHttpService, qService: ng.IQService) => new StarshipTravelService(injectorService,httpService, qService);
             return instance;
         }
     }

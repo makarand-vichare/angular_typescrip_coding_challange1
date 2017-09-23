@@ -12,4 +12,4 @@ var AdminSection;
         App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.AdminHomeController", AdminHomeController);
     })(Controllers = AdminSection.Controllers || (AdminSection.Controllers = {}));
 })(AdminSection || (AdminSection = {}));
-//# sourceMappingURL=adminhomecontroller.js.map
+//# sourceMappingURL=AdminHomeController.js.map

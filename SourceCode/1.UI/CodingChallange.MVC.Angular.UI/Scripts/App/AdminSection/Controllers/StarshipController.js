@@ -67,4 +67,4 @@ var AdminSection;
         App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.StarshipController", StarshipController);
     })(Controllers = AdminSection.Controllers || (AdminSection.Controllers = {}));
 })(AdminSection || (AdminSection = {}));
-//# sourceMappingURL=StarshipController.js.map
+//# sourceMappingURL=starshipcontroller.js.map

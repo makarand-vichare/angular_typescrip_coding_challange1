@@ -232,6 +232,7 @@
     <TypeScriptCompile Include="Scripts\App\AdminSection\Interfaces\IAuthService.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Interfaces\IStarshipService.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Services\AuthService.ts" />
+    <TypeScriptCompile Include="Scripts\App\AdminSection\Services\AuthService.spec.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Services\StarshipService.spec.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Services\PlanetService.spec.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Services\StarshipService.ts" />
@@ -250,6 +251,8 @@
     <TypeScriptCompile Include="Scripts\App\Common\IInterceptor.ts" />
     <TypeScriptCompile Include="Scripts\App\Common\IMessageVM.ts" />
     <TypeScriptCompile Include="Scripts\App\Common\IBaseVM.ts" />
+    <TypeScriptCompile Include="Scripts\App\Common\BaseService.ts" />
+    <TypeScriptCompile Include="Scripts\App\Common\IBaseService.ts" />
     <TypeScriptCompile Include="Scripts\App\HomeSection\Interfaces\ITestApiService.ts" />
     <TypeScriptCompile Include="Scripts\App\HomeSection\Services\TestApiService.ts" />
     <TypeScriptCompile Include="Scripts\App\ModuleInitiator.ts" />
@@ -261,6 +264,7 @@
     <TypeScriptCompile Include="Scripts\App\AdminSection\Interfaces\IPlanetService.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Services\PlanetService.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\ViewModels\IPlanetVM.ts" />
+    <TypeScriptCompile Include="Scripts\App\UsersSection\Controllers\StarshipTravelController.spec.ts" />
     <TypeScriptCompile Include="Scripts\App\UsersSection\Controllers\StarshipTravelController.ts" />
     <TypeScriptCompile Include="Scripts\App\AdminSection\Controllers\StarshipController.ts" />
     <TypeScriptCompile Include="Scripts\App\UsersSection\Interfaces\IStarshipTravelService.ts" />

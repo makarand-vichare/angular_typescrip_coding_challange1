@@ -47,8 +47,9 @@ var Common;
                     }
                     return data;
                 };
-                //this.windowService = injectorService.get<ng.IWindowService>("$window");
-                //this.locationService = injectorService.get<ng.ILocationService>( "$location" );
+                this.windowService = injectorService.get("$window");
+                this.locationService = injectorService.get("$location");
+                this.logService = injectorService.get("$log");
             }
             BaseController.prototype.StartProcess = function () {
                 var self = this;

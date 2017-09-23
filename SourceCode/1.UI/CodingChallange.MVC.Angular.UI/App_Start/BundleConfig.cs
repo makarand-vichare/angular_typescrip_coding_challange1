@@ -31,7 +31,9 @@ namespace CodingChallange.MVC.Angular.UI
                 "~/Scripts/App/ModuleInitiator.js",
                 "~/Scripts/App/Common/AppConstants.js",
                 "~/Scripts/App/Common/BaseController.js",
-                "~/Scripts/App/Common/AuthenticationInterceptor.js"
+                "~/Scripts/App/Common/AuthenticationInterceptor.js",
+                "~/Scripts/App/Common/BaseService.js"
+
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/common-directives").Include(

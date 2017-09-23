@@ -129,8 +129,8 @@ describe("StarshipService", () => {
             }
         ]);
         var starships = service.GetByPage(1);
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+       expect(starships).toBeDefined();
     });
 
     it("should get starships by next", () => {
@@ -234,8 +234,8 @@ describe("StarshipService", () => {
             }
         ]);
         var starships = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=2");
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+       expect(starships).toBeDefined();
     });
 
     it("should get starships by previous", () => {
@@ -339,7 +339,7 @@ describe("StarshipService", () => {
             }
         ]);
         var starships = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=1");
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+       expect(starships).toBeDefined();
     });
 });

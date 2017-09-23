@@ -84,8 +84,8 @@ describe("PlanetService", function () {
             }
         ]);
         var planets = service.GetByPage(1);
-        expect(planets).toBeDefined();
         httpBackEndService.flush();
+        expect(planets).toBeDefined();
     });
     it("should get planets by next", function () {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "planets/?page=2").respond([
@@ -150,8 +150,8 @@ describe("PlanetService", function () {
             }
         ]);
         var planets = service.GetByUrl(Common.AppConstants.SWAPIUrl + "planets/?page=2");
-        expect(planets).toBeDefined();
         httpBackEndService.flush();
+        expect(planets).toBeDefined();
     });
     it("should get planets by previous", function () {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "planets/?page=2").respond([
@@ -216,8 +216,8 @@ describe("PlanetService", function () {
             }
         ]);
         var planets = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2");
-        expect(planets).toBeDefined();
         httpBackEndService.flush();
+        expect(planets).toBeDefined();
     });
 });
 //# sourceMappingURL=PlanetService.spec.js.map

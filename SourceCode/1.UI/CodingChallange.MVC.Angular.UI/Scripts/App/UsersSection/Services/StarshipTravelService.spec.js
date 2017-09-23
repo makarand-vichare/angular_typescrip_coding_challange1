@@ -19,6 +19,7 @@ describe("StarshipTravelService", function () {
         httpBackEndService.verifyNoOutstandingRequest();
     });
     it("should create service", function () {
+        httpBackEndService.flush();
         expect(service).not.toBeNull();
     });
     it("should get starships resupplycount", function () {
@@ -125,8 +126,8 @@ describe("StarshipTravelService", function () {
             }
         ]);
         var starships = service.GetShipsSupplyCount(100000);
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+        expect(starships).toBeDefined();
     });
 });
 //# sourceMappingURL=StarshipTravelService.spec.js.map

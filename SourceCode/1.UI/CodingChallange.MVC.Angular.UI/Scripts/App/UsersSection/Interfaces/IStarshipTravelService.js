@@ -1,1 +1,1 @@
-//# sourceMappingURL=IStarshipTravelService.js.map
+//# sourceMappingURL=istarshiptravelservice.js.map

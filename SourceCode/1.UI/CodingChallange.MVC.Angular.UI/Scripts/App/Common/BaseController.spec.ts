@@ -7,20 +7,18 @@ describe("BaseController", () => {
     var controller: Common.Controllers.BaseController;
     var injectorService: ng.auto.IInjectorService;
 
-    //beforeEach(function () {
-    //    angular.mock.module("App", []);
-    //    angular.mock.module("Common",[]);
-    //});
+    beforeEach(function () {
+        angular.mock.module("App", []);
+        angular.mock.module("Common",[]);
+    });
 
-    //beforeEach(inject(function (_injectorService: ng.auto.IInjectorService) {
-    //    injectorService = _injectorService;
-    //}));
+    beforeEach(inject(function (_injectorService: ng.auto.IInjectorService) {
+        injectorService = _injectorService;
+    }));
 
-    //it("should create controller", () => {
-    //    controller = new Common.Controllers.BaseController(injectorService);
-    //    expect(controller).not.toBeNull(); 
-    //});
-    //it("should not concatinate firstname first", () => {
-    //    expect(person.getFullName(true)).not.toBe("Joe, Smith");
-    //});
+    it("should create controller", () => {
+        controller = new Common.Controllers.BaseController(injectorService);
+        expect(controller).not.toBeNull(); 
+    });
+    
 });

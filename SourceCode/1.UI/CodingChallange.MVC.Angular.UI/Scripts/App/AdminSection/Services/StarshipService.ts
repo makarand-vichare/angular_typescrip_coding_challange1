@@ -1,10 +1,12 @@
 ﻿
 module AdminSection.Services
 {
-    export class StarshipService implements AdminSection.Interfaces.IStarshipService
+    export class StarshipService extends Common.Services.BaseService implements AdminSection.Interfaces.IStarshipService
     {
-        static $inject = ["$http","$q"];
-        constructor( private httpService: ng.IHttpService, private qService:ng.IQService) {}
+        static $inject = ["$injector", "$http","$q"];
+        constructor(private injectorService: ng.auto.IInjectorService, private httpService: ng.IHttpService, private qService: ng.IQService) {
+            super(injectorService);
+        }
 
         GetByPage = (page: number): ng.IPromise<any>  =>
         {
@@ -40,7 +42,7 @@ module AdminSection.Services
 
         static GetInstance = () =>
         {
-            var instance = (httpService: ng.IHttpService, qService: ng.IQService) => new StarshipService(httpService, qService );
+            var instance = (injectorService: ng.auto.IInjectorService, httpService: ng.IHttpService, qService: ng.IQService) => new StarshipService(injectorService,httpService, qService );
             return instance;
         }
     }

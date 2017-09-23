@@ -69,4 +69,4 @@ var UsersSection;
         App.ModuleInitiator.GetModule("UsersSection").controller("UsersSection.Controllers.StarshipTravelController", StarshipTravelController);
     })(Controllers = UsersSection.Controllers || (UsersSection.Controllers = {}));
 })(UsersSection || (UsersSection = {}));
-//# sourceMappingURL=StarshipTravelController.js.map
+//# sourceMappingURL=starshiptravelcontroller.js.map

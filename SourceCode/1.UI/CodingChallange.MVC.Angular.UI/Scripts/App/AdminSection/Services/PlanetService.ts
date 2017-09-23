@@ -1,11 +1,12 @@
 ﻿
 module AdminSection.Services
 {
-    export class PlanetService implements AdminSection.Interfaces.IPlanetService
+    export class PlanetService extends Common.Services.BaseService implements AdminSection.Interfaces.IPlanetService
     {
-        static $inject = ["$http"];
-        constructor( private httpService: ng.IHttpService)
+        static $inject = ["$injector", "$http"];
+        constructor(private injectorService: ng.auto.IInjectorService, private httpService: ng.IHttpService)
         {
+            super(injectorService);
         }
 
         GetByPage = (page: number): ng.IPromise<any> =>
@@ -34,7 +35,7 @@ module AdminSection.Services
 
         static GetInstance = () =>
         {
-            var instance = ($http: ng.IHttpService) => new PlanetService( $http );
+            var instance = (injectorService: ng.auto.IInjectorService, $http: ng.IHttpService) => new PlanetService(injectorService, $http );
             return instance;
         }
     }

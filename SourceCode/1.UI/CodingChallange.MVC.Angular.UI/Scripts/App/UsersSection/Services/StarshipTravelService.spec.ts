@@ -25,6 +25,7 @@ describe("StarshipTravelService", () => {
     });
 
     it("should create service", () => {
+        httpBackEndService.flush();
         expect(service).not.toBeNull(); 
     });
 
@@ -132,8 +133,8 @@ describe("StarshipTravelService", () => {
             }
         ]);
         var starships = service.GetShipsSupplyCount(100000);
-        expect(starships).toBeDefined();
         httpBackEndService.flush();
+       expect(starships).toBeDefined();
     });
 
 });

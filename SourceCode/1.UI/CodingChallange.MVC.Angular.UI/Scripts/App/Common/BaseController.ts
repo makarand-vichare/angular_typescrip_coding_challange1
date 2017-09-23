@@ -4,12 +4,14 @@
     {
         protected locationService: ng.ILocationService;
         protected windowService: ng.IWindowService;
-        static $inject = ["$injector"];
+        protected logService: ng.ILogService;
+       static $inject = ["$injector"];
          
         constructor(private injectorService: ng.auto.IInjectorService )
         {
-            //this.windowService = injectorService.get<ng.IWindowService>("$window");
-            //this.locationService = injectorService.get<ng.ILocationService>( "$location" );
+            this.windowService = injectorService.get<ng.IWindowService>("$window");
+            this.locationService = injectorService.get<ng.ILocationService>("$location");
+            this.logService = injectorService.get<ng.ILogService>("$log");
         }
 
         ProcessInfo = { Message: "" } as Common.ViewModels.IMessageVM;

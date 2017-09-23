@@ -5,19 +5,16 @@
 describe("BaseController", function () {
     var controller;
     var injectorService;
-    //beforeEach(function () {
-    //    angular.mock.module("App", []);
-    //    angular.mock.module("Common",[]);
-    //});
-    //beforeEach(inject(function (_injectorService: ng.auto.IInjectorService) {
-    //    injectorService = _injectorService;
-    //}));
-    //it("should create controller", () => {
-    //    controller = new Common.Controllers.BaseController(injectorService);
-    //    expect(controller).not.toBeNull(); 
-    //});
-    //it("should not concatinate firstname first", () => {
-    //    expect(person.getFullName(true)).not.toBe("Joe, Smith");
-    //});
+    beforeEach(function () {
+        angular.mock.module("App", []);
+        angular.mock.module("Common", []);
+    });
+    beforeEach(inject(function (_injectorService) {
+        injectorService = _injectorService;
+    }));
+    it("should create controller", function () {
+        controller = new Common.Controllers.BaseController(injectorService);
+        expect(controller).not.toBeNull();
+    });
 });
 //# sourceMappingURL=BaseController.spec.js.map
