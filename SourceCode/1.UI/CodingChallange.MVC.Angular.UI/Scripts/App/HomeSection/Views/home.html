@@ -1,0 +1,10 @@
+﻿<div>
+    <button class="btn btn-block m-b-sm" ng-click="homeCtrl.CheckApiUrl()">Get User Info for login</button>
+
+    <ul class="list-group ">
+        <li ng-show="homeCtrl.users" class="list-group-item"> Available Users List : </li>
+        <li ng-show="homeCtrl.users" class="list-group-item" ng-repeat="user in homeCtrl.users">
+            UserName : {{user.userName}} --  Password : {{user.password}}
+        </li>
+    </ul>
+</div>

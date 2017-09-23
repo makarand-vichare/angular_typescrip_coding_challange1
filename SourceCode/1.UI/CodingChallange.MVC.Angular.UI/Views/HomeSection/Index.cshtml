@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+@section scripts {
+
+}
+
+<div class="container" ng-app="HomeSection">
+ @Html.Partial("_TopMenu")
+    <div class="container content-container">
+        <div class="row">
+            <div anti-Forgery-Token ng-view>  </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/adminsection-modules")
+@Scripts.Render("~/bundles/adminsection-services")
+@Scripts.Render("~/bundles/adminsection-controllers")

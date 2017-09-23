@@ -1,0 +1,31 @@
+{
+  "Framework": "jasmine",
+  "Compile": {
+    "Mode": "External",
+    "Extensions": [ ".ts" ],
+    "ExtensionsWithNoOutput": [ ".d.ts" ],
+    "SourceDirectory": "../",
+    "OutDirectory": "../"
+  },
+  "CodeCoverageExcludes": ["*.spec.js"],
+  "References": [
+    { "Path": "../scripts/angular.js" },
+    { "Path": "../scripts/angular-mocks.js" },
+    { "Path": "../scripts/angular-route.js" },
+    { "Path": "../scripts/angular-messages.js" },
+    { "Path": "../scripts/angular-local-storage.js" },
+    { "Path": "../scripts/loading-bar.js" },
+    {
+      "Includes": [ "*/app/*.js" ],
+      "Excludes": [ "*/app/*.d.ts" ]
+    }
+  ],
+  "Tests": [
+    {
+      "Path": "app",
+      "Includes": [ "*/*.spec.ts" ],
+      "Excludes": [ "*/*.d.ts", "*/**.spec.js" ],
+      "ExpandReferenceComments": "true"
+    }
+  ]
+}

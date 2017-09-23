@@ -1,0 +1,43 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" ng-init="planetCtrl.GetPlanets(1)">
+                <table summary="Planet list from swapi.io" class="table table-bordered table-hover">
+                    <caption class="text-center"><h2>Planet List</h2></caption>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Rotation Period</th>
+                            <th>Diameter</th>
+                            <th>Gravity</th>
+                            <th>Population</th>
+                            <th>Climate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="planet in planetCtrl.model.planets">
+                            <td>{{planet.name}}</td>
+                            <td>{{planet.rotation_period}}</td>
+                            <td>{{planet.diameter}}</td>
+                            <td>{{planet.gravity}}</td>
+                            <td>{{planet.population}}</td>
+                            <td>{{planet.climate}}</td>
+                        </tr>
+                        <tr ng-if="!planetCtrl.model.planets"><td colspan="6">No planets found.</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="pagermiddle" >
+                                <button class="btn btn-md btn-default text-left" ng-disabled="!planetCtrl.model.previous" ng-click="planetCtrl.GetByUrl(planetCtrl.model.previous)">Previous</button>
+                                <button class="btn btn-md btn-default pull-right" ng-disabled="!planetCtrl.model.next" ng-click="planetCtrl.GetByUrl(planetCtrl.model.next)">Next</button>
+                            </td>
+                            <td  class="text-right">
+                                <button class="btn btn-md btn-info" ng-click="alert('not implemented')">Add New Planet</button> 
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

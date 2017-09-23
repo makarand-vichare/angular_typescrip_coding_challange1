@@ -1,0 +1,24 @@
+﻿.content-container{
+    margin-top:80px;
+    min-height:400px;
+}
+
+.planet-distance{
+    padding-top:4px;
+    padding-bottom:5px;
+    width:280px;
+}
+
+.planet-distance-caption {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+.pagermiddle {
+    vertical-align: middle;
+}
+
+.loginbutton {
+    width: 200px;
+}

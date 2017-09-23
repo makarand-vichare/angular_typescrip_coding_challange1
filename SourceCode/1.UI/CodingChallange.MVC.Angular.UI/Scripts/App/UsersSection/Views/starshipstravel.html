@@ -1,0 +1,47 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="table-responsive" ng-init="starshiptravelCtrl.GetStarShips(1)">
+                <table summary="Starship travel & resupply count" class="table table-bordered table-hover">
+                    <caption class="text-left">
+                        <span class="planet-distance-caption">Starship Resupply Stop(s) Count</span>
+                        <span class="pull-right">
+                            <input type="text" class="form-control-static planet-distance" ng-model="starshiptravelCtrl.planetDistance" placeholder="Enter Travel distance in MGLT" />
+                            <button class="btn btn-info" ng-click="starshiptravelCtrl.GetShipsSupplyCount()">Calculate</button>
+                        </span>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Crew</th>
+                            <th>Consumables</th>
+                            <th>MGLT/ hr</th>
+                            <th>Stop(s) Required</th>
+                            <th>Travel Distance MGLT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="starship in starshiptravelCtrl.starshipModel.starships">
+                            <td>{{starship.name}}</td>
+                            <td>{{starship.crew}}</td>
+                            <td>{{starship.consumables}}</td>
+                            <td>{{starship.MGLT}}</td>
+                            <td>{{starship.ReSupplyCount}}</td>
+                            <th>{{starshiptravelCtrl.planetDistance}}</th>
+                        </tr>
+                        <tr ng-if="!starshiptravelCtrl.starshipModel.starships"><td colspan="6">No starships found.</td></tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" class="pagermiddle">
+                                <button class="btn btn-md btn-default text-left" ng-disabled="!starshiptravelCtrl.starshipModel.previous" ng-click="starshiptravelCtrl.GetByUrl(starshiptravelCtrl.starshipModel.previous)">Previous</button>
+                                <button class="btn btn-md btn-default pull-right" ng-disabled="!starshiptravelCtrl.starshipModel.next" ng-click="starshiptravelCtrl.GetByUrl(starshiptravelCtrl.starshipModel.next)">Next</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
