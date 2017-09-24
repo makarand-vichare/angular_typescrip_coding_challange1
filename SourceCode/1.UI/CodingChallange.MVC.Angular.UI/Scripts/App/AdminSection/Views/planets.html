@@ -5,7 +5,7 @@
                 <table summary="Planet list from swapi.io" class="table table-bordered table-hover">
                     <caption class="text-center"><h2>Planet List</h2></caption>
                     <thead>
-                        <tr>
+                        <tr class="tableheader">
                             <th>Name</th>
                             <th>Rotation Period</th>
                             <th>Diameter</th>
@@ -32,12 +32,12 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6" class="pagermiddle" >
+                            <td colspan="6" class="pagermiddle">
                                 <button class="btn btn-md btn-default text-left" ng-disabled="!planetCtrl.model.previous" ng-click="planetCtrl.GetByUrl(planetCtrl.model.previous)">Previous</button>
                                 <button class="btn btn-md btn-default pull-right" ng-disabled="!planetCtrl.model.next" ng-click="planetCtrl.GetByUrl(planetCtrl.model.next)">Next</button>
                             </td>
-                            <td  class="text-right">
-                                <button class="btn btn-md btn-info" ng-click="alert('not implemented')">Add New Planet</button> 
+                            <td class="text-right">
+                                <button class="btn btn-md btn-info" ng-click="alert('not implemented')">Add New Planet</button>
                             </td>
                         </tr>
                     </tfoot>

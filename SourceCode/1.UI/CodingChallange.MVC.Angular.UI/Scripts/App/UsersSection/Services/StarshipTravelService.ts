@@ -94,7 +94,7 @@ module UsersSection.Services {
         }
 
         static GetInstance = () => {
-            var instance = (injectorService: ng.auto.IInjectorService, httpService: ng.IHttpService, qService: ng.IQService) => new StarshipTravelService(injectorService,httpService, qService);
+            var instance = (injectorService: ng.auto.IInjectorService, httpService: ng.IHttpService, qService: ng.IQService) => new StarshipTravelService(injectorService, httpService, qService);
             return instance;
         }
     }

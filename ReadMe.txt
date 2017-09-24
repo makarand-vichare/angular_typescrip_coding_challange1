@@ -37,6 +37,8 @@ If the project builds successfully, run the project and check on which port the 
 
 Angular code is available under the folder scripts inside App folder.
 
+** Both the projects - CodingChallange.MVC.Angular.UI & CodingChallange.WebApi2 should be running.(select multiple project option under solution properties) 
+
 Assumptions
 -----------
 

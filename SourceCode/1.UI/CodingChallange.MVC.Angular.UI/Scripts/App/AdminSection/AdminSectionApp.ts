@@ -1,8 +1,7 @@
 ﻿/// <reference path="../../typings/angularjs/angular.d.ts" />
 
-((): void =>
-{
-    var module = App.ModuleInitiator.GetModule( "AdminSection" );
+((): void => {
+    var module = App.ModuleInitiator.GetModule("AdminSection");
     module.config(AdminSection.AdminSectionRoutes.configureRoutes);
     module.config(($httpProvider: ng.IHttpProvider) => {
         $httpProvider.interceptors.push(Common.Interceptors.AuthenticationInterceptor.Factory);

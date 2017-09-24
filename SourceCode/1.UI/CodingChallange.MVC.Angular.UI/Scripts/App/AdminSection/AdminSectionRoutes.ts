@@ -9,7 +9,7 @@
                     templateUrl: "/Scripts/App/AdminSection/Views/home.html",
                     controllerAs: "adminHomeCtrl"
                 }
-            )
+                )
                 .when("/adminHome",
                 {
                     controller: "AdminSection.Controllers.AdminHomeController",

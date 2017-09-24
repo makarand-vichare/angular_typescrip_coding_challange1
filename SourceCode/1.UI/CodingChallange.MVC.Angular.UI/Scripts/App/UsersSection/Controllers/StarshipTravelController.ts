@@ -1,12 +1,9 @@
 ﻿
-module UsersSection.Controllers
-{
-    export class StarshipTravelController extends Common.Controllers.BaseController
-    {
-        static $inject = ["$injector","$uibModal", "UsersSection.Services.StarshipTravelService", "AdminSection.Services.PlanetService"];
-        constructor(_injectorService: ng.auto.IInjectorService, private modelService: ng.ui.bootstrap.IModalService,  private starshipTravelService: UsersSection.Interfaces.IStarshipTravelService, private planetService: AdminSection.Interfaces.IPlanetService )
-        {
-            super( _injectorService );
+module UsersSection.Controllers {
+    export class StarshipTravelController extends Common.Controllers.BaseController {
+        static $inject = ["$injector", "$uibModal", "UsersSection.Services.StarshipTravelService", "AdminSection.Services.PlanetService"];
+        constructor(_injectorService: ng.auto.IInjectorService, private modelService: ng.ui.bootstrap.IModalService, private starshipTravelService: UsersSection.Interfaces.IStarshipTravelService, private planetService: AdminSection.Interfaces.IPlanetService) {
+            super(_injectorService);
         }
 
         starshipModel = {
@@ -16,7 +13,7 @@ module UsersSection.Controllers
         };
         //onlyNumbers :string = "/([1-9][0-9]*||[0]*[1-9]+[0-9]*)/";
         planetDistance: number = Common.AppConstants.RandomDistance;
-        invalidDistance: boolean= false;
+        invalidDistance: boolean = false;
         OpenStarshipModel = (starship: AdminSection.ViewModels.IStarshipVM) => {
             var self = this;
             var modalInstance: ng.ui.bootstrap.IModalServiceInstance = self.modelService.open({
@@ -96,12 +93,12 @@ module UsersSection.Controllers
 
         GetReachablePlanets = (planets: Array<AdminSection.ViewModels.IPlanetVM>): Array<AdminSection.ViewModels.IPlanetVM> => {
             var self = this;
-            var filtered = planets.filter((planet) =>{
+            var filtered = planets.filter((planet) => {
                 return planet.Distance < self.planetDistance;
             });
             return filtered;
         }
 
     }
-    App.ModuleInitiator.GetModule("UsersSection").controller("UsersSection.Controllers.StarshipTravelController", StarshipTravelController );
+    App.ModuleInitiator.GetModule("UsersSection").controller("UsersSection.Controllers.StarshipTravelController", StarshipTravelController);
 } 

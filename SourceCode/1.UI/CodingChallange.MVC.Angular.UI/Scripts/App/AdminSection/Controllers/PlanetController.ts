@@ -1,12 +1,9 @@
 ﻿
-module AdminSection.Controllers
-{
-    export class PlanetController extends Common.Controllers.BaseController
-    {
+module AdminSection.Controllers {
+    export class PlanetController extends Common.Controllers.BaseController {
         static $inject = ["$injector", "AdminSection.Services.PlanetService"];
-        constructor(_injectorService: ng.auto.IInjectorService, private planetService: AdminSection.Interfaces.IPlanetService)
-        {
-            super( _injectorService );
+        constructor(_injectorService: ng.auto.IInjectorService, private planetService: AdminSection.Interfaces.IPlanetService) {
+            super(_injectorService);
         }
 
         model = {
@@ -15,14 +12,12 @@ module AdminSection.Controllers
             previous: ''
         };
 
-        GetPlanets = (page: number) =>
-        {
+        GetPlanets = (page: number) => {
             var self = this;
             self.StartProcess();
 
             self.planetService.GetByPage(page)
-                .then( function ( response: any )
-                {
+                .then(function (response: any) {
                     self.model.planets = self.SetRandomDistance(response.data.results);
                     self.model.next = response.data.next;
                     self.model.previous = response.data.previous;
@@ -30,12 +25,10 @@ module AdminSection.Controllers
                     self.ProcessInfo.IsSucceed = true;
                     self.ProcessInfo.Message = response.data.message;
                 })
-                .catch( function ( response: any )
-                {
+                .catch(function (response: any) {
                     self.ProcessInfo.Message = response.data.message;
                 })
-                .finally( function ()
-                {
+                .finally(function () {
                     self.ProcessInfo.Loading = false;
                 });
         }
@@ -58,8 +51,7 @@ module AdminSection.Controllers
                 });
         }
 
-        private SetRandomDistance = (planets: Array<AdminSection.ViewModels.IPlanetVM>): Array<AdminSection.ViewModels.IPlanetVM> =>
-        {
+        private SetRandomDistance = (planets: Array<AdminSection.ViewModels.IPlanetVM>): Array<AdminSection.ViewModels.IPlanetVM> => {
             planets.forEach((planet) => {
                 planet.Distance = Math.floor(Math.random() * Common.AppConstants.RandomDistance * 2);
             });
@@ -67,5 +59,5 @@ module AdminSection.Controllers
         }
 
     }
-    App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.PlanetController", PlanetController );
+    App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.PlanetController", PlanetController);
 } 

@@ -1,10 +1,7 @@
-﻿module HomeSection
-{
-    export class HomeSectionRoutes
-    {
+﻿module HomeSection {
+    export class HomeSectionRoutes {
         static $inject = ["$routeProvider"];
-        static ConfigureRoutes( $routeProvider: ng.route.IRouteProvider )
-        {
+        static ConfigureRoutes($routeProvider: ng.route.IRouteProvider) {
             $routeProvider
                 .when("/",
                 {
@@ -19,7 +16,7 @@
                     controllerAs: "homeCtrl"
                 });
 
-            $routeProvider.otherwise( { redirectTo: "/" });
+            $routeProvider.otherwise({ redirectTo: "/" });
         }
     }
 }

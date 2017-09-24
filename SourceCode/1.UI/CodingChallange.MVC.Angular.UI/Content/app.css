@@ -1,5 +1,5 @@
 ﻿.content-container{
-    margin-top:80px;
+    margin-top:20px;
     min-height:400px;
 }
 
@@ -43,4 +43,12 @@
     border-color: red;
     border-width: 1px;
     border-style: inset
+}
+
+.tableheader {
+    background-color: lightgray
+}
+
+.fieldCaption{
+    font-weight:bold;
 }

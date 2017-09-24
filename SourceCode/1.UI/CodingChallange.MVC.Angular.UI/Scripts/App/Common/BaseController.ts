@@ -1,14 +1,11 @@
-﻿module Common.Controllers
-{
-    export class BaseController
-    {
+﻿module Common.Controllers {
+    export class BaseController {
         protected locationService: ng.ILocationService;
         protected windowService: ng.IWindowService;
         protected logService: ng.ILogService;
-       static $inject = ["$injector"];
-         
-        constructor(private injectorService: ng.auto.IInjectorService )
-        {
+        static $inject = ["$injector"];
+
+        constructor(private injectorService: ng.auto.IInjectorService) {
             this.windowService = injectorService.get<ng.IWindowService>("$window");
             this.locationService = injectorService.get<ng.ILocationService>("$location");
             this.logService = injectorService.get<ng.ILogService>("$log");
@@ -16,18 +13,16 @@
 
         ProcessInfo = { Message: "" } as Common.ViewModels.IMessageVM;
 
-        StartProcess()
-        {
+        StartProcess() {
             var self = this;
             self.ProcessInfo = {
                 Message: "loading..",
                 Loading: true,
-                IsSucceed:false
+                IsSucceed: false
             }
         }
 
-        EndProcess(message: string, isSucceed: boolean)
-        {
+        EndProcess(message: string, isSucceed: boolean) {
             var self = this;
             self.ProcessInfo = {
                 Message: message,
@@ -36,7 +31,7 @@
             }
         }
 
-        GetQueryStringData = (url: string) : string => {
+        GetQueryStringData = (url: string): string => {
             var self = this;
 
             var indexQuestionMark = url.indexOf("?");

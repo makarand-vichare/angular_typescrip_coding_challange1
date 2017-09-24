@@ -5,7 +5,7 @@
                 <table summary="Starship list from swapi.io" class="table table-bordered table-hover">
                     <caption class="text-center"><h2>Starship List</h2></caption>
                     <thead>
-                        <tr>
+                        <tr class="tableheader">
                             <th>Name</th>
                             <th>Model</th>
                             <th>Crew</th>
@@ -34,7 +34,7 @@
                             <td>{{starship.max_atmosphering_speed}}</td>
                             <td>{{starship.starship_class}}</td>
                         </tr>
-                        <tr ng-if="!starshipCtrl.model.starships" ><td colspan="10">No starships found.</td></tr>
+                        <tr ng-if="!starshipCtrl.model.starships"><td colspan="10">No starships found.</td></tr>
                     </tbody>
                     <tfoot>
                         <tr>

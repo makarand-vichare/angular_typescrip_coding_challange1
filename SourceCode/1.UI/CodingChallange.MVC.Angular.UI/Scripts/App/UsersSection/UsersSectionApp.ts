@@ -1,8 +1,7 @@
 ﻿/// <reference path="../../typings/angularjs/angular.d.ts" />
 
-( (): void =>
-{
-    var module = App.ModuleInitiator.GetModule( "UsersSection" );
+((): void => {
+    var module = App.ModuleInitiator.GetModule("UsersSection");
     module.config(UsersSection.UsersSectionRoutes.configureRoutes);
 
     module.config(($httpProvider: ng.IHttpProvider) => {
