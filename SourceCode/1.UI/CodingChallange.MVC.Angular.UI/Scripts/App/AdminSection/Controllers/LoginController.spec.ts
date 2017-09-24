@@ -2,6 +2,8 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../interfaces/iauthservice.ts" />
+/// <reference path="../../common/basecontroller.ts" />
+
 /// <reference path="logincontroller.ts" />
 
 describe("LoginController", () => {
