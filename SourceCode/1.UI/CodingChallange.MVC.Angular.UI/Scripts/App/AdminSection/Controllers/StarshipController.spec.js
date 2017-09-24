@@ -10,17 +10,19 @@ describe("StarshipController", function () {
     var injectorService;
     var locationService;
     var windowService;
+    var toastrService;
     var httpBackEndService;
     beforeEach(function () {
         angular.mock.module("App", []);
         angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
-    beforeEach(inject(function (_windowService, _locationService, _injectorService, _httpBackEndService, _starshipService) {
+    beforeEach(inject(function (_toastrService, _windowService, _locationService, _injectorService, _httpBackEndService, _starshipService) {
         injectorService = _injectorService;
         httpBackEndService = _httpBackEndService;
         locationService = _locationService;
         windowService = _windowService;
+        toastrService = _toastrService;
         starshipService = _starshipService;
     }));
     afterEach(function () {
@@ -28,7 +30,7 @@ describe("StarshipController", function () {
         httpBackEndService.verifyNoOutstandingRequest();
     });
     it("should create controller", function () {
-        controller = new AdminSection.Controllers.StarshipController(injectorService, starshipService);
+        controller = new AdminSection.Controllers.StarshipController(injectorService, toastrService, starshipService);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();
     });
@@ -132,7 +134,7 @@ describe("StarshipController", function () {
                 "url": "https://swapi.co/api/starships/10/"
             }
         ]);
-        controller = new AdminSection.Controllers.StarshipController(injectorService, starshipService);
+        controller = new AdminSection.Controllers.StarshipController(injectorService, toastrService, starshipService);
         controller.GetStarShips(1);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();

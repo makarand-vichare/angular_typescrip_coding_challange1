@@ -12,6 +12,7 @@ describe("PlanetController", () => {
     var injectorService: ng.auto.IInjectorService;
     var locationService: ng.ILocationService;
     var windowService: ng.IWindowService;
+    var toastrService: ng.toastr.IToastrService;
     var httpBackEndService: ng.IHttpBackendService;
         
     beforeEach(function () {
@@ -20,11 +21,12 @@ describe("PlanetController", () => {
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(inject(function (_windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _planetService: AdminSection.Interfaces.IPlanetService) {
+    beforeEach(inject(function (_toastrService: ng.toastr.IToastrService, _windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _planetService: AdminSection.Interfaces.IPlanetService) {
         injectorService = _injectorService;
         httpBackEndService = _httpBackEndService;
         locationService = _locationService;
         windowService = _windowService;
+        toastrService = _toastrService;
         planetService = _planetService;
     }));
 
@@ -35,7 +37,7 @@ describe("PlanetController", () => {
 
     it("should create controller", () => {
 
-        controller = new AdminSection.Controllers.PlanetController(injectorService, planetService);
+        controller = new AdminSection.Controllers.PlanetController(injectorService, toastrService, planetService);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();
     });
@@ -104,7 +106,7 @@ describe("PlanetController", () => {
             }
         ]);
 
-        controller = new AdminSection.Controllers.PlanetController(injectorService, planetService);
+        controller = new AdminSection.Controllers.PlanetController(injectorService, toastrService, planetService);
         controller.GetPlanets(1);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();

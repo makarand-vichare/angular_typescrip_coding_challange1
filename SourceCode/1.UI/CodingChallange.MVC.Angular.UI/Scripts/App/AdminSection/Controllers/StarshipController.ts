@@ -1,8 +1,8 @@
 ﻿
 module AdminSection.Controllers {
     export class StarshipController extends Common.Controllers.BaseController {
-        static $inject = ["$injector", "AdminSection.Services.StarshipService"];
-        constructor(_injectorService: ng.auto.IInjectorService, private starshipService: AdminSection.Interfaces.IStarshipService) {
+        static $inject = ["$injector", "toastr", "AdminSection.Services.StarshipService"];
+        constructor(_injectorService: ng.auto.IInjectorService, private toastrService: ng.toastr.IToastrService, private starshipService: AdminSection.Interfaces.IStarshipService) {
             super(_injectorService);
         }
 
@@ -50,6 +50,11 @@ module AdminSection.Controllers {
                 .finally(function () {
                     self.ProcessInfo.Loading = false;
                 });
+        }
+
+        InfoMessage = () => {
+            var self = this;
+            self.toastrService.info('App Demo', 'This feature is not yet implmented.');
         }
     }
     App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.StarshipController", StarshipController);

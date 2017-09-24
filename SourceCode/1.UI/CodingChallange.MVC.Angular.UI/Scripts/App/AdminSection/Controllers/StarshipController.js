@@ -14,8 +14,9 @@ var AdminSection;
     (function (Controllers) {
         var StarshipController = (function (_super) {
             __extends(StarshipController, _super);
-            function StarshipController(_injectorService, starshipService) {
+            function StarshipController(_injectorService, toastrService, starshipService) {
                 var _this = _super.call(this, _injectorService) || this;
+                _this.toastrService = toastrService;
                 _this.starshipService = starshipService;
                 _this.model = {
                     starships: new Array(),
@@ -58,11 +59,15 @@ var AdminSection;
                         self.ProcessInfo.Loading = false;
                     });
                 };
+                _this.InfoMessage = function () {
+                    var self = _this;
+                    self.toastrService.info('App Demo', 'This feature is not yet implmented.');
+                };
                 return _this;
             }
             return StarshipController;
         }(Common.Controllers.BaseController));
-        StarshipController.$inject = ["$injector", "AdminSection.Services.StarshipService"];
+        StarshipController.$inject = ["$injector", "toastr", "AdminSection.Services.StarshipService"];
         Controllers.StarshipController = StarshipController;
         App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.StarshipController", StarshipController);
     })(Controllers = AdminSection.Controllers || (AdminSection.Controllers = {}));

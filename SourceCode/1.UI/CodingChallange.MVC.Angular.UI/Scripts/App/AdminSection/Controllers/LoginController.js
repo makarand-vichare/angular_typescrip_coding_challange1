@@ -54,4 +54,4 @@ var AdminSection;
         App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.LoginController", LoginController);
     })(Controllers = AdminSection.Controllers || (AdminSection.Controllers = {}));
 })(AdminSection || (AdminSection = {}));
-//# sourceMappingURL=logincontroller.js.map
+//# sourceMappingURL=LoginController.js.map

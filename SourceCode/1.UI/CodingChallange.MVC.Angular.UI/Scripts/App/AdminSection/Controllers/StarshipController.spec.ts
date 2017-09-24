@@ -12,7 +12,8 @@ describe("StarshipController", () => {
     var injectorService: ng.auto.IInjectorService;
     var locationService: ng.ILocationService;
     var windowService: ng.IWindowService;
-    var httpBackEndService: ng.IHttpBackendService;
+    var toastrService: ng.toastr.IToastrService;
+   var httpBackEndService: ng.IHttpBackendService;
     
     beforeEach(function () {
         angular.mock.module("App", []);
@@ -20,11 +21,12 @@ describe("StarshipController", () => {
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(inject(function (_windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _starshipService: AdminSection.Interfaces.IStarshipService) {
+    beforeEach(inject(function (_toastrService: ng.toastr.IToastrService, _windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _starshipService: AdminSection.Interfaces.IStarshipService) {
         injectorService = _injectorService;
         httpBackEndService = _httpBackEndService;
         locationService = _locationService;
         windowService = _windowService;
+        toastrService = _toastrService;
         starshipService = _starshipService;
     }));
 
@@ -35,7 +37,7 @@ describe("StarshipController", () => {
 
     it("should create controller", () => {
 
-        controller = new AdminSection.Controllers.StarshipController(injectorService, starshipService);
+        controller = new AdminSection.Controllers.StarshipController(injectorService, toastrService, starshipService);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();
     });
@@ -142,7 +144,7 @@ describe("StarshipController", () => {
             }
         ]);
 
-        controller = new AdminSection.Controllers.StarshipController(injectorService, starshipService);
+        controller = new AdminSection.Controllers.StarshipController(injectorService, toastrService, starshipService);
         controller.GetStarShips(1);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();

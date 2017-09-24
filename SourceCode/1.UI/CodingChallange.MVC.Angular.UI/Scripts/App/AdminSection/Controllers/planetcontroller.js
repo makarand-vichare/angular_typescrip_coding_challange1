@@ -14,8 +14,9 @@ var AdminSection;
     (function (Controllers) {
         var PlanetController = (function (_super) {
             __extends(PlanetController, _super);
-            function PlanetController(_injectorService, planetService) {
+            function PlanetController(_injectorService, toastrService, planetService) {
                 var _this = _super.call(this, _injectorService) || this;
+                _this.toastrService = toastrService;
                 _this.planetService = planetService;
                 _this.model = {
                     planets: new Array(),
@@ -58,6 +59,10 @@ var AdminSection;
                         self.ProcessInfo.Loading = false;
                     });
                 };
+                _this.InfoMessage = function () {
+                    var self = _this;
+                    self.toastrService.info('App Demo', 'This feature is not yet implmented.');
+                };
                 _this.SetRandomDistance = function (planets) {
                     planets.forEach(function (planet) {
                         planet.Distance = Math.floor(Math.random() * Common.AppConstants.RandomDistance * 2);
@@ -68,7 +73,7 @@ var AdminSection;
             }
             return PlanetController;
         }(Common.Controllers.BaseController));
-        PlanetController.$inject = ["$injector", "AdminSection.Services.PlanetService"];
+        PlanetController.$inject = ["$injector", "toastr", "AdminSection.Services.PlanetService"];
         Controllers.PlanetController = PlanetController;
         App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.PlanetController", PlanetController);
     })(Controllers = AdminSection.Controllers || (AdminSection.Controllers = {}));

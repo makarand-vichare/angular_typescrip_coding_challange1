@@ -54,4 +54,3 @@ E:\Makrand_Vichare_WebDeveloper_Kneat_CodingChallange_Test\SourceCode\1.UI\Codin
 E:\Makrand_Vichare_WebDeveloper_Kneat_CodingChallange_Test\SourceCode\1.UI\CodingChallange.MVC.Angular.UI\obj\Debug\CodingChallange.MVC.Angular.UI.csproj.CoreCompileInputs.cache
 E:\Makrand_Vichare_WebDeveloper_Kneat_CodingChallange_Test\SourceCode\1.UI\CodingChallange.MVC.Angular.UI\obj\Debug\CodingChallange.MVC.Angular.UI.dll
 E:\Makrand_Vichare_WebDeveloper_Kneat_CodingChallange_Test\SourceCode\1.UI\CodingChallange.MVC.Angular.UI\obj\Debug\CodingChallange.MVC.Angular.UI.pdb
-E:\Makrand_Vichare_WebDeveloper_Kneat_CodingChallange_Test\SourceCode\1.UI\CodingChallange.MVC.Angular.UI\obj\Debug\CodingChallange.MVC.Angular.UI.csprojResolveAssemblyReference.cache

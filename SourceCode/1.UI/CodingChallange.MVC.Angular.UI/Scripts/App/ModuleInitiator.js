@@ -18,7 +18,7 @@ var App;
     ModuleInitiator.modulesList = [
         { name: 'App', dependencies: Array() },
         { name: 'Common', dependencies: Array("ui.bootstrap") },
-        { name: 'AdminSection', dependencies: Array("ngRoute", "Common", "LocalStorageModule", "angular-loading-bar", "ngMessages") },
+        { name: 'AdminSection', dependencies: Array("toastr", "ngRoute", "Common", "LocalStorageModule", "angular-loading-bar", "ngMessages") },
         { name: 'HomeSection', dependencies: Array("ngRoute", "Common", "LocalStorageModule", "AdminSection", "angular-loading-bar", "ngMessages") },
         { name: 'UsersSection', dependencies: Array("ui.bootstrap", "ngRoute", "Common", "LocalStorageModule", "AdminSection", "angular-loading-bar", "ngMessages") },
     ];

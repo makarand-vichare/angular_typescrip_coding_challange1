@@ -1,8 +1,8 @@
 ﻿
 module AdminSection.Controllers {
     export class PlanetController extends Common.Controllers.BaseController {
-        static $inject = ["$injector", "AdminSection.Services.PlanetService"];
-        constructor(_injectorService: ng.auto.IInjectorService, private planetService: AdminSection.Interfaces.IPlanetService) {
+        static $inject = ["$injector","toastr", "AdminSection.Services.PlanetService"];
+        constructor(_injectorService: ng.auto.IInjectorService, private toastrService: ng.toastr.IToastrService, private planetService: AdminSection.Interfaces.IPlanetService) {
             super(_injectorService);
         }
 
@@ -11,7 +11,6 @@ module AdminSection.Controllers {
             next: '',
             previous: ''
         };
-
         GetPlanets = (page: number) => {
             var self = this;
             self.StartProcess();
@@ -50,14 +49,17 @@ module AdminSection.Controllers {
                     self.ProcessInfo.Loading = false;
                 });
         }
-
+        InfoMessage = () => {
+            var self = this;
+            self.toastrService.info('App Demo', 'This feature is not yet implmented.');
+        }
         private SetRandomDistance = (planets: Array<AdminSection.ViewModels.IPlanetVM>): Array<AdminSection.ViewModels.IPlanetVM> => {
             planets.forEach((planet) => {
                 planet.Distance = Math.floor(Math.random() * Common.AppConstants.RandomDistance * 2);
             });
             return planets;
         }
-
     }
+
     App.ModuleInitiator.GetModule("AdminSection").controller("AdminSection.Controllers.PlanetController", PlanetController);
 } 
