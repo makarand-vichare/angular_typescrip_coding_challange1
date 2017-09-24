@@ -15,9 +15,11 @@
     { "Path": "../scripts/angular-messages.js" },
     { "Path": "../scripts/angular-local-storage.js" },
     { "Path": "../scripts/loading-bar.js" },
+    { "Path": "../scripts/angular-toastr.tpls.js" },
+    { "Path": "../scripts/angular-ui/ui-bootstrap-tpls.js" },
     {
-      "Includes": [ "*/app/*.js" ],
-      "Excludes": [ "*/app/*.d.ts" ]
+      "Includes": [ "../scripts/app/*.js" ],
+      "Excludes": [ "../scripts/app/*.d.ts" ]
     }
   ],
   "Tests": [

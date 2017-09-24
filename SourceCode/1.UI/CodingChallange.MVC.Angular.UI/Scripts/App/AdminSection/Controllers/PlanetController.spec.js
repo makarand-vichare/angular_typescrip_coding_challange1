@@ -2,7 +2,6 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../interfaces/iplanetservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
 /// <reference path="planetcontroller.ts" />
 describe("PlanetController", function () {
     var controller;
@@ -13,8 +12,6 @@ describe("PlanetController", function () {
     var toastrService;
     var httpBackEndService;
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
     beforeEach(inject(function (_toastrService, _windowService, _locationService, _injectorService, _httpBackEndService, _planetService) {

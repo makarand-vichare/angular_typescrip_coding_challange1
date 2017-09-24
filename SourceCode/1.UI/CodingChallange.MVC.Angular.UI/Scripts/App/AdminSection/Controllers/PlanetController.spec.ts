@@ -2,7 +2,6 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../interfaces/iplanetservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
 /// <reference path="planetcontroller.ts" />
 
 describe("PlanetController", () => {
@@ -16,8 +15,6 @@ describe("PlanetController", () => {
     var httpBackEndService: ng.IHttpBackendService;
         
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
 

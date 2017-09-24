@@ -7,7 +7,7 @@ describe("AdminHomeController", function () {
     var injectorService;
     beforeEach(function () {
         angular.mock.module("App", []);
-        angular.mock.module("Common", []);
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
     });
     it("should create controller", function () {

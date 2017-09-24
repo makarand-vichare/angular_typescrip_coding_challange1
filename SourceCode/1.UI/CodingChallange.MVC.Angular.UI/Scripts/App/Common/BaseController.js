@@ -81,6 +81,7 @@ var Common;
         }());
         BaseController.$inject = ["$injector"];
         Controllers.BaseController = BaseController;
+        App.ModuleInitiator.GetModule("Common").controller("Common.Controllers.BaseController", BaseController);
     })(Controllers = Common.Controllers || (Common.Controllers = {}));
 })(Common || (Common = {}));
 //# sourceMappingURL=basecontroller.js.map

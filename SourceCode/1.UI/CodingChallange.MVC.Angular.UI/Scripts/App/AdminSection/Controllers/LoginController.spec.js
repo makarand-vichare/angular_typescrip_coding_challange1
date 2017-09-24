@@ -2,7 +2,6 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../interfaces/iauthservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
 /// <reference path="logincontroller.ts" />
 describe("LoginController", function () {
     var controller;
@@ -12,8 +11,6 @@ describe("LoginController", function () {
     var windowService;
     var httpBackEndService;
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
     beforeEach(inject(function (_windowService, _locationService, _injectorService, _httpBackEndService, _authService) {

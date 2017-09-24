@@ -90,4 +90,5 @@
         }
 
     }
+    App.ModuleInitiator.GetModule("Common").controller("Common.Controllers.BaseController", BaseController);
 }

@@ -1,22 +1,21 @@
 ﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+
+/// <reference path="../interfaces/iplanetservice.ts" />
 /// <reference path="planetservice.ts" />
 
 describe("PlanetService", () => {
 
-    var service: AdminSection.Services.PlanetService;
+    var service: AdminSection.Interfaces.IPlanetService;
     var httpBackEndService: ng.IHttpBackendService;
-        
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(angular.mock.inject(function (_httpBackEndService: ng.IHttpBackendService, _service: AdminSection.Services.PlanetService) {
-        httpBackEndService = _httpBackEndService;
-        service = _service;
+    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
+        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
+        service = injectorService.get<AdminSection.Interfaces.IPlanetService>("AdminSection.Services.PlanetService");
     }));
 
     afterEach(function () {
@@ -25,7 +24,7 @@ describe("PlanetService", () => {
     });
 
     it("should create service", () => {
-        expect(service).not.toBeNull(); 
+        expect(service).not.toBeNull();
     });
 
     it("should get planets of page 1", () => {

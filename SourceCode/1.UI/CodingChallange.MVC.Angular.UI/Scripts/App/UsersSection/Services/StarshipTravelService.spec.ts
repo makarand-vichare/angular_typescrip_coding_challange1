@@ -1,23 +1,24 @@
 ﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+/// <reference path="../interfaces/istarshiptravelservice.ts" />
+
 /// <reference path="starshiptravelservice.ts" />
 
 describe("StarshipTravelService", () => {
 
-    var service: UsersSection.Services.StarshipTravelService;
+    var service: UsersSection.Interfaces.IStarshipTravelService;
     var httpBackEndService: ng.IHttpBackendService;
         
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("UsersSection");
     });
 
-    beforeEach(angular.mock.inject(function (_httpBackEndService: ng.IHttpBackendService, _service: UsersSection.Services.StarshipTravelService) {
-        httpBackEndService = _httpBackEndService;
-        service = _service;
+    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
+        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
+        service = injectorService.get<UsersSection.Interfaces.IStarshipTravelService>("UsersSection.Services.StarshipTravelService");
     }));
+
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();

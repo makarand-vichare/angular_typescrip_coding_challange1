@@ -2,7 +2,6 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../interfaces/istarshiptravelservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
 /// <reference path="starshiptravelcontroller.ts" />
 
 describe("StarshipTravelController", () => {
@@ -16,10 +15,9 @@ describe("StarshipTravelController", () => {
     var locationService: ng.ILocationService;
     var windowService: ng.IWindowService;
     var httpBackEndService: ng.IHttpBackendService;
-    
+
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
+        angular.mock.module("UsersSection");
         angular.mock.module("AdminSection");
     });
 

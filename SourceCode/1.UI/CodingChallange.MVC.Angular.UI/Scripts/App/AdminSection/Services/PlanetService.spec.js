@@ -1,18 +1,17 @@
 /// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+/// <reference path="../interfaces/iplanetservice.ts" />
 /// <reference path="planetservice.ts" />
 describe("PlanetService", function () {
     var service;
     var httpBackEndService;
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
-    beforeEach(angular.mock.inject(function (_httpBackEndService, _service) {
-        httpBackEndService = _httpBackEndService;
-        service = _service;
+    beforeEach(angular.mock.inject(function (injectorService) {
+        httpBackEndService = injectorService.get("$httpBackend");
+        service = injectorService.get("AdminSection.Services.PlanetService");
     }));
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();

@@ -1,22 +1,22 @@
 ﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+
+/// <reference path="../interfaces/istarshipservice.ts" />
 /// <reference path="starshipservice.ts" />
 
 describe("StarshipService", () => {
 
-    var service: AdminSection.Services.StarshipService;
+    var service: AdminSection.Interfaces.IStarshipService;
     var httpBackEndService: ng.IHttpBackendService;
         
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(angular.mock.inject(function (_httpBackEndService: ng.IHttpBackendService, _service: AdminSection.Services.StarshipService) {
-        httpBackEndService = _httpBackEndService;
-        service = _service;
+    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
+        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
+        service = injectorService.get<AdminSection.Interfaces.IStarshipService>("AdminSection.Services.StarshipService");
     }));
 
     afterEach(function () {

@@ -2,8 +2,6 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../interfaces/iauthservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
-
 /// <reference path="logincontroller.ts" />
 
 describe("LoginController", () => {
@@ -16,8 +14,6 @@ describe("LoginController", () => {
     var httpBackEndService: ng.IHttpBackendService;
 
     beforeEach(function () {
-        angular.mock.module("App", []);
-        angular.mock.module("Common", []);
         angular.mock.module("AdminSection");
     });
 
@@ -27,7 +23,6 @@ describe("LoginController", () => {
         locationService = _locationService;
         windowService = _windowService;
         authService = _authService;
-
     }));
 
     afterEach(function () {
