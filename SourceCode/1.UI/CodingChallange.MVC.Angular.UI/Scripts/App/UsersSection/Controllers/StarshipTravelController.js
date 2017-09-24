@@ -24,8 +24,9 @@ var UsersSection;
                     next: '',
                     previous: ''
                 };
-                _this.onlyNumbers = /^[1-9][0-9]*$/;
+                //onlyNumbers :string = "/([1-9][0-9]*||[0]*[1-9]+[0-9]*)/";
                 _this.planetDistance = Common.AppConstants.RandomDistance;
+                _this.invalidDistance = false;
                 _this.OpenStarshipModel = function (starship) {
                     var self = _this;
                     var modalInstance = self.modelService.open({
@@ -57,7 +58,12 @@ var UsersSection;
                 };
                 _this.GetShipsSupplyCount = function () {
                     var self = _this;
+                    self.invalidDistance = false;
                     self.StartProcess();
+                    if (self.planetDistance == null || self.planetDistance <= 0) {
+                        self.invalidDistance = true;
+                        return;
+                    }
                     self.starshipTravelService.GetShipsSupplyCount(self.planetDistance)
                         .then(function (response) {
                         self.starshipModel.starships = response.data.results;

@@ -9,7 +9,7 @@
     width:280px;
 }
 
-.planet-distance-caption {
+.resupply-count-caption {
     font-weight: bold;
     font-size: 20px;
     color: black;
@@ -17,6 +17,10 @@
 
 .pagermiddle {
     vertical-align: middle;
+}
+
+.planets-lists {
+    padding-top: 10px;
 }
 
 .loginbutton {
@@ -31,5 +35,12 @@
 .imagesmallsize {
     width: 40px;
     height: 40px;
-    margin:2px;
+    margin: 2px;
+    border-radius: 21px;
+}
+
+.invalidDistance {
+    border-color: red;
+    border-width: 1px;
+    border-style: inset
 }

@@ -14,9 +14,9 @@ module UsersSection.Controllers
             next: '',
             previous: ''
         };
-        onlyNumbers = /^[1-9][0-9]*$/;
+        //onlyNumbers :string = "/([1-9][0-9]*||[0]*[1-9]+[0-9]*)/";
         planetDistance: number = Common.AppConstants.RandomDistance;
-
+        invalidDistance: boolean= false;
         OpenStarshipModel = (starship: AdminSection.ViewModels.IStarshipVM) => {
             var self = this;
             var modalInstance: ng.ui.bootstrap.IModalServiceInstance = self.modelService.open({
@@ -51,7 +51,13 @@ module UsersSection.Controllers
 
         GetShipsSupplyCount = () => {
             var self = this;
+            self.invalidDistance = false;
+
             self.StartProcess();
+            if (self.planetDistance == null || self.planetDistance <= 0) {
+                self.invalidDistance = true;
+                return;
+            }
 
             self.starshipTravelService.GetShipsSupplyCount(self.planetDistance)
                 .then(function (response: any) {

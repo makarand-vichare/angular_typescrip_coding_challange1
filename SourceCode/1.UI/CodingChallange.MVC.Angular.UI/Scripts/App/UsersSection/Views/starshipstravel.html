@@ -4,17 +4,21 @@
             <div class="table-responsive" ng-init="starshiptravelCtrl.GetStarShips(1)">
                 <table summary="Starship travel & resupply count" class="table table-bordered table-hover">
                     <caption class="text-left">
-                        <span class="planet-distance-caption">Starship Resupply Stop(s) Count</span>
+                        <span class="resupply-count-caption">Starship Resupply Stop(s) Count</span>
                         <span class="pull-right">
-                            <input type="number" ng-pattern="starshiptravelCtrl.onlyNumbers" class="form-control-static planet-distance" ng-model="starshiptravelCtrl.planetDistance" placeholder="Enter Travel distance in MGLT" />
+                            <input type="number" required ng-class="starshiptravelCtrl.invalidDistance?'invalidDistance invalid':''"
+                                   class="form-control-static planet-distance" 
+                                   ng-model="starshiptravelCtrl.planetDistance" placeholder="Enter Travel distance in MGLT" />
                             <button class="btn btn-info" ng-click="starshiptravelCtrl.GetShipsSupplyCount()">Calculate</button>
                         </span>
-                        <span ng-repeat="planet in starshiptravelCtrl.GetReachablePlanets(planetCtrl.model.planets)">
-                            <a>
-                                <img ng-src="{{'scripts/app/images/planets/'+ planet.name +'.jpeg'}}" ng-click="starshiptravelCtrl.OpenPlanetModel(planet)"
-                                     class="imagesmallsize" alt="planet" />
+                    </caption>
+                    <caption>
+                        <span class="pull-right" ng-repeat="planet in starshiptravelCtrl.GetReachablePlanets(planetCtrl.model.planets)">
+                            <a href="" ng-click="starshiptravelCtrl.OpenPlanetModel(planet)">
+                                <img ng-src="{{'scripts/app/images/planets/'+ planet.name +'.jpeg'}}" class="imagesmallsize" alt="planet" />
                             </a>
                         </span>
+                        <span class="pull-right planets-lists">Planets in reach(click for more info) : </span>
                     </caption>
                     <thead>
                         <tr>
@@ -110,49 +114,37 @@
                     <h3 class="modal-title">Planet Details</h3>
                 </div>
                 <div class="modal-body">
-                    <table summary="Starship Details" class="table table-bordered table-hover">
+                    <table summary="Planet Details" class="table table-bordered table-hover">
                         <tbody>
                             <tr>
                                 <td>Name</td>
                                 <td>{{popup.selectedItem.name}}</td>
-                                <td>Model</td>
-                                <td>{{popup.selectedItem.model}}</td>
+                                <td>Rotation Period</td>
+                                <td>{{popup.selectedItem.rotation_period}}</td>
                             </tr>
                             <tr>
-                                <td>Manufacturer</td>
-                                <td>{{popup.selectedItem.manufacturer}}</td>
-                                <td>Cost In Credits</td>
-                                <td>{{popup.selectedItem.cost_in_credits}}</td>
+                                <td>Orbital Period</td>
+                                <td>{{popup.selectedItem.orbital_period}}</td>
+                                <td>Diameter</td>
+                                <td>{{popup.selectedItem.diameter}}</td>
                             </tr>
                             <tr>
-                                <td>Ship Length</td>
-                                <td>{{popup.selectedItem.length}}</td>
-                                <td>Max Atmosphering Speed</td>
-                                <td>{{popup.selectedItem.max_atmosphering_speed}}</td>
+                                <td>Climate</td>
+                                <td>{{popup.selectedItem.climate}}</td>
+                                <td>Gravity</td>
+                                <td>{{popup.selectedItem.gravity}}</td>
                             </tr>
                             <tr>
-                                <td>Crew</td>
-                                <td>{{popup.selectedItem.crew}}</td>
-                                <td>Passengers</td>
-                                <td>{{popup.selectedItem.passengers}}</td>
+                                <td>Terrain</td>
+                                <td>{{popup.selectedItem.terrain}}</td>
+                                <td>Surface Water</td>
+                                <td>{{popup.selectedItem.surface_water}}</td>
                             </tr>
                             <tr>
-                                <td>Cargo Capacity</td>
-                                <td>{{popup.selectedItem.cargo_capacity}}</td>
-                                <td>Consumables</td>
-                                <td>{{popup.selectedItem.consumables}}</td>
-                            </tr>
-                            <tr>
-                                <td>Hyperdrive Rating</td>
-                                <td>{{popup.selectedItem.hyperdrive_rating}}</td>
-                                <td>Starship Class</td>
-                                <td>{{popup.selectedItem.starship_class}}</td>
-                            </tr>
-                            <tr>
-                                <td>ReSupplyCount</td>
-                                <td>{{popup.selectedItem.ReSupplyCount}}</td>
-                                <td>MGLT</td>
-                                <td>{{popup.selectedItem.MGLT}}</td>
+                                <td>Population</td>
+                                <td>{{popup.selectedItem.population}}</td>
+                                <td>Distance</td>
+                                <td>{{popup.selectedItem.Distance}}</td>
                             </tr>
                         </tbody>
                     </table>
