@@ -7,5 +7,6 @@
         Gravity: string;
         Population: number;
         Climate: string;
+        Distance: number;
     }
 }

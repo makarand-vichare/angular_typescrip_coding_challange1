@@ -20,7 +20,10 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="starship in starshipCtrl.model.starships">
-                            <td>{{starship.name}}</td>
+                            <td>
+                                <div>{{starship.name}}</div>
+                                <div><img ng-src="{{'../scripts/app/images/starships/'+ starship.name +'.jpg'}}" class="imagesize" alt="starship" /></div>
+                            </td>
                             <td>{{starship.model}}</td>
                             <td>{{starship.crew}}</td>
                             <td>{{starship.passengers}}</td>

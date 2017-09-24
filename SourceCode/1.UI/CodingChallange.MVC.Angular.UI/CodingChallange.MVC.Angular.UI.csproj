@@ -161,6 +161,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\App\HomeSection\Views\home.html" />
+    <Content Include="Scripts\App\Images\starships\download %281%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %282%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %283%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %284%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %285%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %286%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %287%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %288%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download %289%29.jpg" />
+    <Content Include="Scripts\App\Images\starships\download.jpg" />
     <Content Include="Scripts\App\UsersSection\Views\starshipstravel.html" />
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
@@ -317,7 +327,9 @@
   <ItemGroup>
     <Content Include="Views\UsersSection\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Scripts\App\Images\planets\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

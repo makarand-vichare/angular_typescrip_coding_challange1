@@ -27,7 +27,7 @@ var AdminSection;
                     self.StartProcess();
                     self.planetService.GetByPage(page)
                         .then(function (response) {
-                        self.model.planets = response.data.results;
+                        self.model.planets = self.SetRandomDistance(response.data.results);
                         self.model.next = response.data.next;
                         self.model.previous = response.data.previous;
                         self.ProcessInfo.IsSucceed = true;
@@ -45,7 +45,7 @@ var AdminSection;
                     self.StartProcess();
                     self.planetService.GetByUrl(url)
                         .then(function (response) {
-                        self.model.planets = response.data.results;
+                        self.model.planets = self.SetRandomDistance(response.data.results);
                         self.model.next = response.data.next;
                         self.model.previous = response.data.previous;
                         self.ProcessInfo.IsSucceed = true;
@@ -57,6 +57,12 @@ var AdminSection;
                         .finally(function () {
                         self.ProcessInfo.Loading = false;
                     });
+                };
+                _this.SetRandomDistance = function (planets) {
+                    planets.forEach(function (planet) {
+                        planet.Distance = Math.floor(Math.random() * Common.AppConstants.RandomDistance * 2);
+                    });
+                    return planets;
                 };
                 return _this;
             }

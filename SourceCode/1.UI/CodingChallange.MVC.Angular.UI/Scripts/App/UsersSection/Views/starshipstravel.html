@@ -1,5 +1,5 @@
 ﻿<div class="container">
-    <div class="row">
+    <div class="row" ng-controller="AdminSection.Controllers.PlanetController as planetCtrl" ng-init="planetCtrl.GetPlanets(1)">
         <div class="col-xs-12" ng-controller="UsersSection.Controllers.StarshipTravelController as starshiptravelCtrl">
             <div class="table-responsive" ng-init="starshiptravelCtrl.GetStarShips(1)">
                 <table summary="Starship travel & resupply count" class="table table-bordered table-hover">
@@ -9,6 +9,12 @@
                             <input type="number" ng-pattern="starshiptravelCtrl.onlyNumbers" class="form-control-static planet-distance" ng-model="starshiptravelCtrl.planetDistance" placeholder="Enter Travel distance in MGLT" />
                             <button class="btn btn-info" ng-click="starshiptravelCtrl.GetShipsSupplyCount()">Calculate</button>
                         </span>
+                        <span ng-repeat="planet in starshiptravelCtrl.GetReachablePlanets(planetCtrl.model.planets)">
+                            <a>
+                                <img ng-src="{{'scripts/app/images/planets/'+ planet.name +'.jpeg'}}" ng-click="starshiptravelCtrl.OpenPlanetModel(planet)"
+                                     class="imagesmallsize" alt="planet" />
+                            </a>
+                        </span>
                     </caption>
                     <thead>
                         <tr>
@@ -17,26 +23,25 @@
                             <th>Consumables</th>
                             <th>MGLT / hr</th>
                             <th>Stop(s) Required</th>
-                            <th>Travel Distance MGLT</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="starship in starshiptravelCtrl.starshipModel.starships">
                             <td>
                                 <div>{{starship.name}}</div>
+                                <div><img ng-src="{{'scripts/app/images/starships/'+ starship.name +'.jpg'}}" class="imagesize" alt="here should be an image" /></div>
                                 <div><button class="btn-xs btn-info pull-right" ng-click="starshiptravelCtrl.OpenStarshipModel(starship)">Details</button></div>
                             </td>
                             <td>{{starship.crew}}</td>
                             <td>{{starship.consumables}}</td>
                             <td>{{starship.MGLT}}</td>
                             <td>{{starship.ReSupplyCount}}</td>
-                            <td>{{starshiptravelCtrl.planetDistance}}</td>
                         </tr>
                         <tr ng-if="!starshiptravelCtrl.starshipModel.starships"><td colspan="6">No starships found.</td></tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="6" class="pagermiddle">
+                            <td colspan="5" class="pagermiddle">
                                 <button class="btn btn-md btn-default text-left" ng-disabled="!starshiptravelCtrl.starshipModel.previous" ng-click="starshiptravelCtrl.GetByUrl(starshiptravelCtrl.starshipModel.previous)">Previous</button>
                                 <button class="btn btn-md btn-default pull-right" ng-disabled="!starshiptravelCtrl.starshipModel.next" ng-click="starshiptravelCtrl.GetByUrl(starshiptravelCtrl.starshipModel.next)">Next</button>
                             </td>
@@ -100,6 +105,63 @@
                     <button class="btn btn-warning" type="button" ng-click="popup.Close()">Close</button>
                 </div>
             </script>
+            <script type="text/ng-template" id="planetModal.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Planet Details</h3>
+                </div>
+                <div class="modal-body">
+                    <table summary="Starship Details" class="table table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td>{{popup.selectedItem.name}}</td>
+                                <td>Model</td>
+                                <td>{{popup.selectedItem.model}}</td>
+                            </tr>
+                            <tr>
+                                <td>Manufacturer</td>
+                                <td>{{popup.selectedItem.manufacturer}}</td>
+                                <td>Cost In Credits</td>
+                                <td>{{popup.selectedItem.cost_in_credits}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ship Length</td>
+                                <td>{{popup.selectedItem.length}}</td>
+                                <td>Max Atmosphering Speed</td>
+                                <td>{{popup.selectedItem.max_atmosphering_speed}}</td>
+                            </tr>
+                            <tr>
+                                <td>Crew</td>
+                                <td>{{popup.selectedItem.crew}}</td>
+                                <td>Passengers</td>
+                                <td>{{popup.selectedItem.passengers}}</td>
+                            </tr>
+                            <tr>
+                                <td>Cargo Capacity</td>
+                                <td>{{popup.selectedItem.cargo_capacity}}</td>
+                                <td>Consumables</td>
+                                <td>{{popup.selectedItem.consumables}}</td>
+                            </tr>
+                            <tr>
+                                <td>Hyperdrive Rating</td>
+                                <td>{{popup.selectedItem.hyperdrive_rating}}</td>
+                                <td>Starship Class</td>
+                                <td>{{popup.selectedItem.starship_class}}</td>
+                            </tr>
+                            <tr>
+                                <td>ReSupplyCount</td>
+                                <td>{{popup.selectedItem.ReSupplyCount}}</td>
+                                <td>MGLT</td>
+                                <td>{{popup.selectedItem.MGLT}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" ng-click="popup.Close()">Close</button>
+                </div>
+            </script>
+
         </div>
     </div>
 </div>

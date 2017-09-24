@@ -12,22 +12,27 @@
                             <th>Gravity</th>
                             <th>Population</th>
                             <th>Climate</th>
+                            <th>Distance MGLT</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="planet in planetCtrl.model.planets">
-                            <td>{{planet.name}}</td>
+                            <td>
+                                <div>{{planet.name}}</div>
+                                <div><img ng-src="{{'../scripts/app/images/planets/'+ planet.name +'.jpeg'}}" class="imagesize" alt="planet" /></div>
+                            </td>
                             <td>{{planet.rotation_period}}</td>
                             <td>{{planet.diameter}}</td>
                             <td>{{planet.gravity}}</td>
                             <td>{{planet.population}}</td>
                             <td>{{planet.climate}}</td>
+                            <td>{{planet.Distance}}</td>
                         </tr>
                         <tr ng-if="!planetCtrl.model.planets"><td colspan="6">No planets found.</td></tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="5" class="pagermiddle" >
+                            <td colspan="6" class="pagermiddle" >
                                 <button class="btn btn-md btn-default text-left" ng-disabled="!planetCtrl.model.previous" ng-click="planetCtrl.GetByUrl(planetCtrl.model.previous)">Previous</button>
                                 <button class="btn btn-md btn-default pull-right" ng-disabled="!planetCtrl.model.next" ng-click="planetCtrl.GetByUrl(planetCtrl.model.next)">Next</button>
                             </td>

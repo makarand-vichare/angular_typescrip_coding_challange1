@@ -15,15 +15,15 @@ var Common;
             configurable: true
         });
         ;
+        Object.defineProperty(AppConstants, "RandomDistance", {
+            get: function () { return 1000000; },
+            enumerable: true,
+            configurable: true
+        });
+        ;
         return AppConstants;
     }());
     Common.AppConstants = AppConstants;
-    var HeardAboutUsList;
-    (function (HeardAboutUsList) {
-        HeardAboutUsList[HeardAboutUsList["Advert"] = 1] = "Advert";
-        HeardAboutUsList[HeardAboutUsList["WordOfMouth"] = 2] = "WordOfMouth";
-        HeardAboutUsList[HeardAboutUsList["Other"] = 3] = "Other";
-    })(HeardAboutUsList = Common.HeardAboutUsList || (Common.HeardAboutUsList = {}));
     App.ModuleInitiator.GetModule("Common").constant("Common.AppConstants", AppConstants);
 })(Common || (Common = {}));
 //# sourceMappingURL=AppConstants.js.map

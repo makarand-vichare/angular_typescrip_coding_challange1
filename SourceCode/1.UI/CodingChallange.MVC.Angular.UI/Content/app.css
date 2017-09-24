@@ -22,3 +22,14 @@
 .loginbutton {
     width: 200px;
 }
+
+.imagesize {
+    width: 200px;
+    height: 140px;
+}
+
+.imagesmallsize {
+    width: 40px;
+    height: 40px;
+    margin:2px;
+}

@@ -15,22 +15,7 @@ module UsersSection.Controllers
             previous: ''
         };
         onlyNumbers = /^[1-9][0-9]*$/;
-        planetDistance: number = 1000000;
-        showModal = false;
-        private selectedStarship: AdminSection.ViewModels.IStarshipVM;
-        //OpenModel = (starship: AdminSection.ViewModels.IStarshipVM) => {
-        //    var options: ng.ui.bootstrap.IModalSettings = {
-        //        templateUrl: 'modal.html',
-        //        controller: Common.Controllers.ModelController + ' as modal',
-        //        resolve: {
-        //            item: () => starship // <- this will pass the same instance 
-        //            // of the item displayed in the table to the modal
-        //        }
-        //    };
-
-        //    //this.$modal.open(options).result
-        //    //    .then(updatedItem => this.CloseModel(updatedItem));
-        //}
+        planetDistance: number = Common.AppConstants.RandomDistance;
 
         OpenStarshipModel = (starship: AdminSection.ViewModels.IStarshipVM) => {
             var self = this;
@@ -46,7 +31,21 @@ module UsersSection.Controllers
             });
 
             modalInstance.result.then((selectedItem: AdminSection.ViewModels.IStarshipVM) => {
-                self.selectedStarship = selectedItem;
+                //self.selectedStarship = selectedItem;
+            });
+        };
+
+        OpenPlanetModel = (planet: AdminSection.ViewModels.IPlanetVM) => {
+            var self = this;
+            var modalInstance: ng.ui.bootstrap.IModalServiceInstance = self.modelService.open({
+                templateUrl: 'planetModal.html',
+                controller: Common.Controllers.ModelController,
+                bindToController: true,
+                controllerAs: 'popup',
+                resolve: {
+                    item: () => planet // <- this will pass the same instance 
+                    // of the item displayed in the table to the modal
+                }
             });
         };
 
@@ -87,6 +86,14 @@ module UsersSection.Controllers
                 .finally(function () {
                     self.ProcessInfo.Loading = false;
                 });
+        }
+
+        GetReachablePlanets = (planets: Array<AdminSection.ViewModels.IPlanetVM>): Array<AdminSection.ViewModels.IPlanetVM> => {
+            var self = this;
+            var filtered = planets.filter((planet) =>{
+                return planet.Distance < self.planetDistance;
+            });
+            return filtered;
         }
 
     }
