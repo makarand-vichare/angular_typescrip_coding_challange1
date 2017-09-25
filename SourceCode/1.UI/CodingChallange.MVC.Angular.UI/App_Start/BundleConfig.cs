@@ -16,6 +16,7 @@ namespace CodingChallange.MVC.Angular.UI
             "~/Scripts/angular-local-storage.js",
             "~/Scripts/loading-bar.js",
             "~/Scripts/angular-messages.js",
+            "~/Scripts/angular-animate.js",
             "~/Scripts/angular-toastr.tpls.js",
             "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
             ));

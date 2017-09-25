@@ -5,7 +5,8 @@
         static modulesList = [
             { name: 'App', dependencies: Array<string>() },
             { name: 'Common', dependencies: Array<string>("ui.bootstrap") },
-            { name: 'AdminSection', dependencies: Array<string>("toastr", "ngRoute", "Common", "LocalStorageModule", "angular-loading-bar", "ngMessages") },
+            {
+                name: 'AdminSection', dependencies: Array<string>("toastr","ngAnimate", "ngRoute", "Common", "LocalStorageModule", "angular-loading-bar", "ngMessages") },
             { name: 'HomeSection', dependencies: Array<string>("ngRoute", "Common", "LocalStorageModule","AdminSection", "angular-loading-bar", "ngMessages"  ) },
             { name: 'UsersSection', dependencies: Array<string>("ui.bootstrap", "ngRoute", "Common", "LocalStorageModule", "AdminSection", "angular-loading-bar", "ngMessages") },
         ];

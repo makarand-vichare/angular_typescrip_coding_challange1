@@ -1,22 +1,29 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+﻿/// <reference path="../../_service-script-references.d.ts" />
+/// <reference path="../../_service-references.d.ts" />
 /// <reference path="../interfaces/iauthservice.ts" />
-/// <reference path="authservice.ts" />
 
 describe("AuthService", () => {
 
-    var service: AdminSection.Interfaces.IAuthService;
+    var service: AdminSection.Services.AuthService;
+    var injectorService: ng.auto.IInjectorService;
     var httpBackEndService: ng.IHttpBackendService;
-        
+    var httpService: ng.IHttpService;
+    var localStorageService: ng.local.storage.ILocalStorageService;
+
     beforeEach(function () {
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
-        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
-        service = injectorService.get<AdminSection.Interfaces.IAuthService>("AdminSection.Services.AuthService");
-    }));
+    beforeEach(() => angular.mock.inject(["$injector", "$httpBackend", "$http", "localStorageService",
+        (_injectorService: ng.auto.IInjectorService,
+            _httpBackEndService: ng.IHttpBackendService, _httpService: ng.IHttpService, _localStorageService: ng.local.storage.ILocalStorageService) => {
+            injectorService = _injectorService;
+            httpBackEndService = _httpBackEndService;
+            httpService = _httpService;
+            localStorageService = _localStorageService;
+        }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -24,7 +31,8 @@ describe("AuthService", () => {
     });
 
     it("should create service", () => {
-        expect(service).not.toBeNull(); 
+        service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
+       expect(service).not.toBeNull(); 
     });
 
     it("Admin should able to login", () => {
@@ -41,13 +49,12 @@ describe("AuthService", () => {
         httpBackEndService.expectPOST(Common.AppConstants.AuthAPIUrl + '/token', data).respond(
             response
         );
-
-        var result = service.Login(loginData);
-        httpBackEndService.flush();
-
-        expect(result).toBeDefined();
-        expect(result).toBe(response);
-
+        service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
+        var result = service.Login(loginData).then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+        });
     });
 
     it("User should able to login", () => {
@@ -65,13 +72,13 @@ describe("AuthService", () => {
         httpBackEndService.expectPOST(Common.AppConstants.AuthAPIUrl + '/token').respond(
             response
         );
+        service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
 
-        var result = service.Login(loginData);
-        httpBackEndService.flush();
-
-        expect(result).toBeDefined();
-        expect(result).toBe(response);
-
+        var result = service.Login(loginData).then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+        });
     });
 
     it("Invalid User should not able to login", () => {
@@ -90,11 +97,13 @@ describe("AuthService", () => {
             response
         );
 
-        var result = service.Login(loginData);
-        httpBackEndService.flush();
+        service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
 
-        expect(result).toBeDefined();
-        expect(result).toBe(response);
+        var result = service.Login(loginData).then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+        });
     });
 
     it("Validate antiforgery token", () => {
@@ -109,9 +118,13 @@ describe("AuthService", () => {
             response
         );
 
-        var result = service.GetAntiForgeryToken();
-        httpBackEndService.flush();
-        expect(result).toBeDefined();
+        service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
+
+        var result = service.GetAntiForgeryToken().then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+        });
     });
 
 });

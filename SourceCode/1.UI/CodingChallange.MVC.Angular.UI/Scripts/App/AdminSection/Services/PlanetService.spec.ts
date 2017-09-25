@@ -1,22 +1,29 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+﻿/// <reference path="../../_service-script-references.d.ts" />
+/// <reference path="../../_service-references.d.ts" />
 
 /// <reference path="../interfaces/iplanetservice.ts" />
 /// <reference path="planetservice.ts" />
 
 describe("PlanetService", () => {
 
-    var service: AdminSection.Interfaces.IPlanetService;
+    var service: AdminSection.Services.PlanetService;
+    var injectorService: ng.auto.IInjectorService;
     var httpBackEndService: ng.IHttpBackendService;
+    var httpService: ng.IHttpService;
+
     beforeEach(function () {
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
-        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
-        service = injectorService.get<AdminSection.Interfaces.IPlanetService>("AdminSection.Services.PlanetService");
-    }));
+    beforeEach(() => angular.mock.inject(["$injector", "$httpBackend", "$http",
+        (_injectorService: ng.auto.IInjectorService,
+            _httpBackEndService: ng.IHttpBackendService, _httpService: ng.IHttpService) => {
+            injectorService = _injectorService;
+            httpBackEndService = _httpBackEndService;
+            httpService = _httpService;
+        }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -24,11 +31,12 @@ describe("PlanetService", () => {
     });
 
     it("should create service", () => {
+        service = new AdminSection.Services.PlanetService(injectorService, httpService);
         expect(service).not.toBeNull();
     });
 
     it("should get planets of page 1", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl +"?page=1").respond([
+        var planets = [
             {
                 "name": "Alderaan",
                 "rotation_period": "24",
@@ -88,15 +96,23 @@ describe("PlanetService", () => {
                 "edited": "2014-12-20T20:58:18.423000Z",
                 "url": "https://swapi.co/api/planets/4/"
             }
-        ]);
-
-        var planets = service.GetByPage(1);
-        httpBackEndService.flush();
-        expect(planets).toBeDefined();
+        ];
+        var response = {
+            results: planets
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/planets/?page=1").respond(response);
+        service = new AdminSection.Services.PlanetService(injectorService, httpService);
+        service.GetByPage(1).then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(3);
+        });
     });
 
     it("should get planets by next", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "planets/?page=2").respond([
+        var planets = [
             {
                 "name": "Alderaan",
                 "rotation_period": "24",
@@ -156,15 +172,24 @@ describe("PlanetService", () => {
                 "edited": "2014-12-20T20:58:18.423000Z",
                 "url": "https://swapi.co/api/planets/4/"
             }
-        ]);
+        ];
+        var response = {
+            results: planets
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/planets/?page=2").respond(response);
+        service = new AdminSection.Services.PlanetService(injectorService, httpService);
 
-        var planets = service.GetByUrl(Common.AppConstants.SWAPIUrl + "planets/?page=2");
-        httpBackEndService.flush();
-       expect(planets).toBeDefined();
+        service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2").then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(3);
+        });
     });
 
     it("should get planets by previous", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "planets/?page=2").respond([
+        var planets = [
             {
                 "name": "Alderaan",
                 "rotation_period": "24",
@@ -224,10 +249,18 @@ describe("PlanetService", () => {
                 "edited": "2014-12-20T20:58:18.423000Z",
                 "url": "https://swapi.co/api/planets/4/"
             }
-        ]);
+        ];
+        var response = {
+            results: planets
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/planets/?page=2").respond(response);
 
-        var planets = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2");
-        httpBackEndService.flush();
-       expect(planets).toBeDefined();
+        service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2").then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(3);
+        });
     });
 });

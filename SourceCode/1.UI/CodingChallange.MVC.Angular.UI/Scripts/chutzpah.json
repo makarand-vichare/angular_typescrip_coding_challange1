@@ -9,14 +9,17 @@
   },
   "CodeCoverageExcludes": ["*.spec.js"],
   "References": [
+    { "Path": "../scripts/jquery-1.9.1.js" },
     { "Path": "../scripts/angular.js" },
-    { "Path": "../scripts/angular-mocks.js" },
     { "Path": "../scripts/angular-route.js" },
     { "Path": "../scripts/angular-messages.js" },
     { "Path": "../scripts/angular-local-storage.js" },
     { "Path": "../scripts/loading-bar.js" },
+    { "Path": "../scripts/angular-animate.js" },
     { "Path": "../scripts/angular-toastr.tpls.js" },
     { "Path": "../scripts/angular-ui/ui-bootstrap-tpls.js" },
+    { "Path": "../scripts/angular-mocks.js" },
+
     {
       "Includes": [ "../scripts/app/*.js" ],
       "Excludes": [ "../scripts/app/*.d.ts" ]

@@ -141,6 +141,8 @@
     <Content Include="Content\angular-toastr.css" />
     <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-toastr.js" />
     <Content Include="Scripts\angular-toastr.min.js" />
     <Content Include="Scripts\angular-toastr.tpls.js" />
@@ -198,6 +200,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\chutzpah.json" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -295,6 +298,10 @@
     <TypeScriptCompile Include="Scripts\App\UsersSection\UsersSectionApp.ts" />
     <TypeScriptCompile Include="Scripts\App\UsersSection\UsersSectionRoutes.ts" />
     <TypeScriptCompile Include="Scripts\App\UsersSection\ViewModels\IStarshipTravelVM.ts" />
+    <TypeScriptCompile Include="Scripts\App\_service-references.d.ts" />
+    <TypeScriptCompile Include="Scripts\App\_controller-references.d.ts" />
+    <TypeScriptCompile Include="Scripts\App\_service-script-references.d.ts" />
+    <TypeScriptCompile Include="Scripts\App\_controller-script-references.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-loading-bar\angular-loading-bar.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-local-storage\angular-local-storage.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular-toastr\index.d.ts" />

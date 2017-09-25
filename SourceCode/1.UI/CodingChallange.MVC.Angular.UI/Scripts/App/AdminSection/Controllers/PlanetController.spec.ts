@@ -1,33 +1,32 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path="../interfaces/iplanetservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
+﻿/// <reference path="../../_controller-script-references.d.ts" />
+/// <reference path="../../_controller-references.d.ts" />
 
+/// <reference path="../interfaces/iplanetservice.ts" />
+/// <reference path="../services/planetservice.ts" />
 /// <reference path="planetcontroller.ts" />
 
 describe("PlanetController", () => {
 
     var controller: AdminSection.Controllers.PlanetController;
     var planetService: AdminSection.Interfaces.IPlanetService;
-    var injectorService: ng.auto.IInjectorService;
-    var locationService: ng.ILocationService;
-    var windowService: ng.IWindowService;
+    var injectorService: ng.auto.IInjectorService; //= angular.injector(['ngMock', 'ng']);
     var toastrService: ng.toastr.IToastrService;
     var httpBackEndService: ng.IHttpBackendService;
         
     beforeEach(function () {
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(inject(function (_toastrService: ng.toastr.IToastrService, _windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _planetService: AdminSection.Interfaces.IPlanetService) {
-        injectorService = _injectorService;
-        httpBackEndService = _httpBackEndService;
-        locationService = _locationService;
-        windowService = _windowService;
-        toastrService = _toastrService;
-        planetService = _planetService;
-    }));
+    beforeEach(() => angular.mock.inject(["$injector", "toastr","$httpBackend", "AdminSection.Services.PlanetService",
+        (_injectorService: ng.auto.IInjectorService, _toastrService: ng.toastr.IToastrService,
+            _httpBackEndService: ng.IHttpBackendService, _planetService: AdminSection.Interfaces.IPlanetService) => {
+            injectorService = _injectorService;
+            toastrService = _toastrService;
+            httpBackEndService = _httpBackEndService;
+            planetService = _planetService;
+    }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -35,15 +34,13 @@ describe("PlanetController", () => {
     });
 
     it("should create controller", () => {
-
         controller = new AdminSection.Controllers.PlanetController(injectorService, toastrService, planetService);
-        httpBackEndService.flush();
         expect(controller).not.toBeNull();
     });
 
     it("should get planets", () => {
 
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "?page=1").respond([
+        var planets = [
             {
                 "name": "Alderaan",
                 "rotation_period": "24",
@@ -103,13 +100,19 @@ describe("PlanetController", () => {
                 "edited": "2014-12-20T20:58:18.423000Z",
                 "url": "https://swapi.co/api/planets/4/"
             }
-        ]);
+        ];
+        var response = {
+            results: planets
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/planets/?page=1").respond(response);
 
         controller = new AdminSection.Controllers.PlanetController(injectorService, toastrService, planetService);
         controller.GetPlanets(1);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();
         expect(controller.model).not.toBeNull();
+        expect(controller.model.planets).not.toBeNull();
+        expect(controller.model.planets.length).toBe(3);
     });
 
 });

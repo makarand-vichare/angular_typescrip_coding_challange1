@@ -1,9 +1,12 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path="../interfaces/istarshiptravelservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
+﻿/// <reference path="../../_controller-script-references.d.ts" />
+/// <reference path="../../../typings/angular-ui-bootstrap/index.d.ts" />
+/// <reference path="../../_controller-references.d.ts" />
 
+/// <reference path="../interfaces/istarshiptravelservice.ts" />
+/// <reference path="../../adminsection/interfaces/iplanetservice.ts" />
+/// <reference path="../../adminsection/services/planetservice.ts" />
+/// <reference path="../services/starshiptravelservice.ts" />
+/// <reference path="../../common/modelcontroller.ts" />
 /// <reference path="starshiptravelcontroller.ts" />
 
 describe("StarshipTravelController", () => {
@@ -11,27 +14,30 @@ describe("StarshipTravelController", () => {
     var controller: UsersSection.Controllers.StarshipTravelController;
     var starshipTravelService: UsersSection.Interfaces.IStarshipTravelService;
     var planetService: AdminSection.Interfaces.IPlanetService;
-
-    var injectorService: ng.auto.IInjectorService;
-    var modelService: ng.ui.bootstrap.IModalService;
-    var locationService: ng.ILocationService;
-    var windowService: ng.IWindowService;
+    var injectorService: ng.auto.IInjectorService; //= angular.injector(['ngMock', 'ng']);
     var httpBackEndService: ng.IHttpBackendService;
+    var modelService: ng.ui.bootstrap.IModalService;
 
     beforeEach(function () {
-        angular.mock.module("UsersSection");
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
+        angular.mock.module("UsersSection");
     });
 
-    beforeEach(inject(function (_modelService: ng.ui.bootstrap.IModalService, _windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _starshipTravelService: UsersSection.Interfaces.IStarshipTravelService, _planetService: AdminSection.Interfaces.IPlanetService) {
-        injectorService = _injectorService;
-        httpBackEndService = _httpBackEndService;
-        locationService = _locationService;
-        windowService = _windowService;
-        starshipTravelService = _starshipTravelService;
-        planetService = _planetService;
-        modelService = _modelService;
-    }));
+    beforeEach(() => angular.mock.inject(["$injector", "$uibModal", "UsersSection.Services.StarshipTravelService", "AdminSection.Services.PlanetService", "$httpBackend",
+            (   _injectorService: ng.auto.IInjectorService,
+                _modelService: ng.ui.bootstrap.IModalService,
+                _starshipTravelService: UsersSection.Interfaces.IStarshipTravelService,
+                _planetService: AdminSection.Interfaces.IPlanetService,
+                _httpBackEndService: ng.IHttpBackendService,
+            ) => {
+                injectorService = _injectorService;
+                httpBackEndService = _httpBackEndService;
+                starshipTravelService = _starshipTravelService;
+                planetService = _planetService;
+                modelService = _modelService;
+        }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -39,15 +45,12 @@ describe("StarshipTravelController", () => {
     });
 
     it("should create controller", () => {
-
         controller = new UsersSection.Controllers.StarshipTravelController(injectorService, modelService, starshipTravelService, planetService);
-        httpBackEndService.flush();
         expect(controller).not.toBeNull();
     });
 
     it("should get starships for resupplycount", () => {
-
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/").respond([
+        var starships = [
             {
                 "name": "Executor",
                 "model": "Executor-class star dreadnought",
@@ -62,7 +65,6 @@ describe("StarshipTravelController", () => {
                 "hyperdrive_rating": "2.0",
                 "MGLT": "40",
                 "starship_class": "Star dreadnought",
-                "pilots": [],
                 "films": [
                     "https://swapi.co/api/films/2/",
                     "https://swapi.co/api/films/3/"
@@ -148,7 +150,12 @@ describe("StarshipTravelController", () => {
                 "edited": "2014-12-22T17:35:44.464156Z",
                 "url": "https://swapi.co/api/starships/10/"
             }
-        ]);
+        ];
+        var response = {
+            results: starships
+        }
+
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/").respond(response);
 
         controller = new UsersSection.Controllers.StarshipTravelController(injectorService, modelService, starshipTravelService, planetService);
         controller.GetShipsSupplyCount();
@@ -156,6 +163,8 @@ describe("StarshipTravelController", () => {
         expect(controller).not.toBeNull();
         expect(controller.starshipModel).not.toBeNull();
         expect(controller.planetDistance).toBeGreaterThan(0);
+        expect(controller.starshipModel.starships).not.toBeNull();
+        expect(controller.starshipModel.starships.length).toBe(4);
 
     });
 

@@ -1,33 +1,32 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path="../interfaces/istarshipservice.ts" />
-/// <reference path="../../common/basecontroller.ts" />
+﻿/// <reference path="../../_controller-script-references.d.ts" />
+/// <reference path="../../_controller-references.d.ts" />
 
+/// <reference path="../interfaces/istarshipservice.ts" />
+/// <reference path="../services/starshipservice.ts" />
 /// <reference path="starshipcontroller.ts" />
 
 describe("StarshipController", () => {
 
     var controller: AdminSection.Controllers.StarshipController;
     var starshipService: AdminSection.Interfaces.IStarshipService;
-    var injectorService: ng.auto.IInjectorService;
-    var locationService: ng.ILocationService;
-    var windowService: ng.IWindowService;
+    var injectorService: ng.auto.IInjectorService; //= angular.injector(['ngMock', 'ng']);
     var toastrService: ng.toastr.IToastrService;
-   var httpBackEndService: ng.IHttpBackendService;
+    var httpBackEndService: ng.IHttpBackendService;
     
     beforeEach(function () {
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(inject(function (_toastrService: ng.toastr.IToastrService, _windowService: ng.IWindowService, _locationService: ng.ILocationService, _injectorService: ng.auto.IInjectorService, _httpBackEndService: ng.IHttpBackendService, _starshipService: AdminSection.Interfaces.IStarshipService) {
-        injectorService = _injectorService;
-        httpBackEndService = _httpBackEndService;
-        locationService = _locationService;
-        windowService = _windowService;
-        toastrService = _toastrService;
-        starshipService = _starshipService;
-    }));
+    beforeEach(() => angular.mock.inject(["$injector", "toastr", "$httpBackend", "AdminSection.Services.StarshipService",
+        (_injectorService: ng.auto.IInjectorService, _toastrService: ng.toastr.IToastrService,
+            _httpBackEndService: ng.IHttpBackendService, _starshipService: AdminSection.Interfaces.IStarshipService) => {
+            injectorService = _injectorService;
+            toastrService = _toastrService;
+            httpBackEndService = _httpBackEndService;
+            starshipService = _starshipService;
+        }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -37,13 +36,12 @@ describe("StarshipController", () => {
     it("should create controller", () => {
 
         controller = new AdminSection.Controllers.StarshipController(injectorService, toastrService, starshipService);
-        httpBackEndService.flush();
         expect(controller).not.toBeNull();
     });
 
     it("should get starships", () => {
 
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond([
+        var starships = [
             {
                 "name": "Executor",
                 "model": "Executor-class star dreadnought",
@@ -141,13 +139,19 @@ describe("StarshipController", () => {
                 "edited": "2014-12-22T17:35:44.464156Z",
                 "url": "https://swapi.co/api/starships/10/"
             }
-        ]);
+        ];
+        var response = {
+            results: starships
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond(response);
 
         controller = new AdminSection.Controllers.StarshipController(injectorService, toastrService, starshipService);
         controller.GetStarShips(1);
         httpBackEndService.flush();
         expect(controller).not.toBeNull();
         expect(controller.model).not.toBeNull();
+        expect(controller.model.starships).not.toBeNull();
+        expect(controller.model.starships.length).toBe(4);
     });
 
 });

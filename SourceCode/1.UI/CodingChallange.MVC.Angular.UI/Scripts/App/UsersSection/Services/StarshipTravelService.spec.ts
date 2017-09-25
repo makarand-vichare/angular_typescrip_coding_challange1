@@ -1,24 +1,31 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path="../interfaces/istarshiptravelservice.ts" />
+﻿/// <reference path="../../_service-script-references.d.ts" />
+/// <reference path="../../_service-references.d.ts" />
 
+/// <reference path="../interfaces/istarshiptravelservice.ts" />
 /// <reference path="starshiptravelservice.ts" />
 
 describe("StarshipTravelService", () => {
 
-    var service: UsersSection.Interfaces.IStarshipTravelService;
+    var service: UsersSection.Services.StarshipTravelService;
+    var injectorService: ng.auto.IInjectorService;
     var httpBackEndService: ng.IHttpBackendService;
-        
+    var httpService: ng.IHttpService;
+    var qService: ng.IQService;
+       
     beforeEach(function () {
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("UsersSection");
     });
 
-    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
-        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
-        service = injectorService.get<UsersSection.Interfaces.IStarshipTravelService>("UsersSection.Services.StarshipTravelService");
-    }));
-
+    beforeEach(() => angular.mock.inject(["$injector", "$httpBackend", "$http", "$q",
+        (_injectorService: ng.auto.IInjectorService,
+            _httpBackEndService: ng.IHttpBackendService, _httpService: ng.IHttpService, _qService: ng.IQService) => {
+            injectorService = _injectorService;
+            httpBackEndService = _httpBackEndService;
+            httpService = _httpService;
+            qService = _qService;
+       }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -26,12 +33,12 @@ describe("StarshipTravelService", () => {
     });
 
     it("should create service", () => {
-        httpBackEndService.flush();
+        service = new UsersSection.Services.StarshipTravelService(injectorService, httpService, qService);
         expect(service).not.toBeNull(); 
     });
 
     it("should get starships resupplycount", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/").respond([
+        var starships = [
             {
                 "name": "Executor",
                 "model": "Executor-class star dreadnought",
@@ -46,7 +53,6 @@ describe("StarshipTravelService", () => {
                 "hyperdrive_rating": "2.0",
                 "MGLT": "40",
                 "starship_class": "Star dreadnought",
-                "pilots": [],
                 "films": [
                     "https://swapi.co/api/films/2/",
                     "https://swapi.co/api/films/3/"
@@ -59,7 +65,7 @@ describe("StarshipTravelService", () => {
                 "name": "Sentinel-class landing craft",
                 "model": "Sentinel-class landing craft",
                 "resupplyCount": "0",
-                 "manufacturer": "Sienar Fleet Systems, Cyngus Spaceworks",
+                "manufacturer": "Sienar Fleet Systems, Cyngus Spaceworks",
                 "cost_in_credits": "240000",
                 "length": "38",
                 "max_atmosphering_speed": "1000",
@@ -104,7 +110,7 @@ describe("StarshipTravelService", () => {
             {
                 "name": "Millennium Falcon",
                 "model": "YT-1300 light freighter",
-                "resupplyCount" : "1",
+                "resupplyCount": "1",
                 "manufacturer": "Corellian Engineering Corporation",
                 "cost_in_credits": "100000",
                 "length": "34.37",
@@ -132,10 +138,19 @@ describe("StarshipTravelService", () => {
                 "edited": "2014-12-22T17:35:44.464156Z",
                 "url": "https://swapi.co/api/starships/10/"
             }
-        ]);
-        var starships = service.GetShipsSupplyCount(100000);
-        httpBackEndService.flush();
-       expect(starships).toBeDefined();
-    });
+        ];
+        var response = {
+            results: starships
+        }
 
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/").respond(response);
+        service = new UsersSection.Services.StarshipTravelService(injectorService, httpService, qService);
+        service.GetShipsSupplyCount(100000).then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(4);
+        });
+    });
 });

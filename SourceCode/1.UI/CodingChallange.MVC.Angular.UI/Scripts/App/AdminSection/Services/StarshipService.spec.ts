@@ -1,23 +1,31 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../typings/jasmine/jasmine.d.ts" />
+﻿/// <reference path="../../_service-script-references.d.ts" />
+/// <reference path="../../_service-references.d.ts" />
 
 /// <reference path="../interfaces/istarshipservice.ts" />
 /// <reference path="starshipservice.ts" />
 
 describe("StarshipService", () => {
 
-    var service: AdminSection.Interfaces.IStarshipService;
+    var service: AdminSection.Services.StarshipService;
+    var injectorService: ng.auto.IInjectorService;
     var httpBackEndService: ng.IHttpBackendService;
+    var httpService: ng.IHttpService;
+    var qService: ng.IQService;
         
     beforeEach(function () {
+        angular.mock.module("App");
+        angular.mock.module("Common");
         angular.mock.module("AdminSection");
     });
 
-    beforeEach(angular.mock.inject(function (injectorService: ng.auto.IInjectorService) {
-        httpBackEndService = injectorService.get<ng.IHttpBackendService>("$httpBackend");
-        service = injectorService.get<AdminSection.Interfaces.IStarshipService>("AdminSection.Services.StarshipService");
-    }));
+    beforeEach(() => angular.mock.inject(["$injector", "$httpBackend", "$http", "$q",
+        (_injectorService: ng.auto.IInjectorService,
+            _httpBackEndService: ng.IHttpBackendService, _httpService: ng.IHttpService, _qService: ng.IQService) => {
+            injectorService = _injectorService;
+            httpBackEndService = _httpBackEndService;
+            httpService = _httpService;
+            qService = _qService;
+        }]));
 
     afterEach(function () {
         httpBackEndService.verifyNoOutstandingExpectation();
@@ -25,11 +33,12 @@ describe("StarshipService", () => {
     });
 
     it("should create service", () => {
+        service = new AdminSection.Services.StarshipService(injectorService, httpService, qService);
         expect(service).not.toBeNull(); 
     });
 
     it("should get starships of page 1", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond([
+        var starships = [
             {
                 "name": "Executor",
                 "model": "Executor-class star dreadnought",
@@ -127,14 +136,23 @@ describe("StarshipService", () => {
                 "edited": "2014-12-22T17:35:44.464156Z",
                 "url": "https://swapi.co/api/starships/10/"
             }
-        ]);
-        var starships = service.GetByPage(1);
-        httpBackEndService.flush();
-       expect(starships).toBeDefined();
+        ];
+        var response = {
+            results: starships
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond(response);
+        service = new AdminSection.Services.StarshipService(injectorService, httpService, qService);
+        service.GetByPage(1).then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(4);
+        });
     });
 
     it("should get starships by next", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=2").respond([
+        var starships = [
             {
                 "name": "Executor",
                 "model": "Executor-class star dreadnought",
@@ -232,14 +250,23 @@ describe("StarshipService", () => {
                 "edited": "2014-12-22T17:35:44.464156Z",
                 "url": "https://swapi.co/api/starships/10/"
             }
-        ]);
-        var starships = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=2");
-        httpBackEndService.flush();
-       expect(starships).toBeDefined();
+        ];
+        var response = {
+            results: starships
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=2").respond(response);
+        service = new AdminSection.Services.StarshipService(injectorService, httpService, qService);
+        service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=2").then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(4);
+        });
     });
 
     it("should get starships by previous", () => {
-        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond([
+        var starships = [
             {
                 "name": "Executor",
                 "model": "Executor-class star dreadnought",
@@ -337,9 +364,17 @@ describe("StarshipService", () => {
                 "edited": "2014-12-22T17:35:44.464156Z",
                 "url": "https://swapi.co/api/starships/10/"
             }
-        ]);
-        var starships = service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=1");
-        httpBackEndService.flush();
-       expect(starships).toBeDefined();
+        ];
+        var response = {
+            results: starships
+        }
+        httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond(response);
+        service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=1").then(function (response: any) {
+            httpBackEndService.flush();
+            expect(response).toBeDefined();
+            expect(response.data).toBeDefined();
+            expect(response.data.results).toBeDefined();
+            expect(response.data.results.length).toBe(4);
+        });
     });
 });

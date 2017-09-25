@@ -19,7 +19,6 @@ module AdminSection.Services {
             return self.httpService.get(Common.AppConstants.SWAPIUrl + '/planets/', config);
         }
 
-
         GetByUrl = (url: string): ng.IPromise<any> => {
             var self = this;
             var config = {
