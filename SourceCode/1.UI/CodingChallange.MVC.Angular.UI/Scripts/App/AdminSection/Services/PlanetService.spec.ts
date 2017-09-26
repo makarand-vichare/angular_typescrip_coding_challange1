@@ -103,12 +103,12 @@ describe("PlanetService", () => {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/planets/?page=1").respond(response);
         service = new AdminSection.Services.PlanetService(injectorService, httpService);
         service.GetByPage(1).then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(3);
         });
+        httpBackEndService.flush();
     });
 
     it("should get planets by next", () => {
@@ -180,12 +180,14 @@ describe("PlanetService", () => {
         service = new AdminSection.Services.PlanetService(injectorService, httpService);
 
         service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2").then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(3);
         });
+
+        httpBackEndService.flush();
+
     });
 
     it("should get planets by previous", () => {
@@ -254,13 +256,14 @@ describe("PlanetService", () => {
             results: planets
         }
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/planets/?page=2").respond(response);
-
+        service = new AdminSection.Services.PlanetService(injectorService, httpService);
         service.GetByUrl(Common.AppConstants.SWAPIUrl + "/planets/?page=2").then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(3);
         });
+        httpBackEndService.flush();
+
     });
 });

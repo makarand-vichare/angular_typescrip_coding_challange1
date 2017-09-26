@@ -143,12 +143,13 @@ describe("StarshipService", () => {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond(response);
         service = new AdminSection.Services.StarshipService(injectorService, httpService, qService);
         service.GetByPage(1).then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(4);
         });
+        httpBackEndService.flush();
+
     });
 
     it("should get starships by next", () => {
@@ -257,12 +258,13 @@ describe("StarshipService", () => {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=2").respond(response);
         service = new AdminSection.Services.StarshipService(injectorService, httpService, qService);
         service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=2").then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(4);
         });
+        httpBackEndService.flush();
+
     });
 
     it("should get starships by previous", () => {
@@ -369,12 +371,14 @@ describe("StarshipService", () => {
             results: starships
         }
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/?page=1").respond(response);
+        service = new AdminSection.Services.StarshipService(injectorService, httpService, qService);
         service.GetByUrl(Common.AppConstants.SWAPIUrl + "/starships/?page=1").then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(4);
         });
+        httpBackEndService.flush();
+
     });
 });

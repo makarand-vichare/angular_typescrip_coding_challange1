@@ -146,11 +146,12 @@ describe("StarshipTravelService", () => {
         httpBackEndService.expectGET(Common.AppConstants.SWAPIUrl + "/starships/").respond(response);
         service = new UsersSection.Services.StarshipTravelService(injectorService, httpService, qService);
         service.GetShipsSupplyCount(100000).then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
             expect(response.data.results).toBeDefined();
             expect(response.data.results.length).toBe(4);
         });
+        httpBackEndService.flush();
+
     });
 });

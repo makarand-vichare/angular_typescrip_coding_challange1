@@ -51,10 +51,11 @@ describe("AuthService", () => {
         );
         service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
         var result = service.Login(loginData).then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
         });
+        httpBackEndService.flush();
+
     });
 
     it("User should able to login", () => {
@@ -75,10 +76,11 @@ describe("AuthService", () => {
         service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
 
         var result = service.Login(loginData).then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
         });
+        httpBackEndService.flush();
+
     });
 
     it("Invalid User should not able to login", () => {
@@ -100,10 +102,11 @@ describe("AuthService", () => {
         service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
 
         var result = service.Login(loginData).then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
         });
+        httpBackEndService.flush();
+
     });
 
     it("Validate antiforgery token", () => {
@@ -121,10 +124,11 @@ describe("AuthService", () => {
         service = new AdminSection.Services.AuthService(injectorService, httpService, localStorageService);
 
         var result = service.GetAntiForgeryToken().then(function (response: any) {
-            httpBackEndService.flush();
             expect(response).toBeDefined();
             expect(response.data).toBeDefined();
         });
+        httpBackEndService.flush();
+
     });
 
 });
